@@ -1,0 +1,23 @@
+# Material fuente pesado (no se versiona; GitHub limita archivos a 100 MB)
+Fotos James/
+*.mov
+ScreenRecording_*
+*.tif
+J10XJAMES MODELO *.jpg
+X-Ray View of Phanta Trail Sneakers.png
+
+# Fotos de prueba con marca de agua del fotógrafo
+DSC*.jpg
+
+# Referentes y documentos de trabajo
+Manual v1_ Quest Lab x JR.pdf
+Business Systems for Creators*.jpeg
+Find Your Focus.jpeg
+dbd84cc3c13fd9c6e58c828c8e63c1ac.jpg
+IMG_3052.JPG
+
+# Versiones anteriores locales
+_version-anterior/
+
+# Sistema
+.DS_Store

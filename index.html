@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="QUEST[LAB]: diseño, tecnología y funcionalidad para el movimiento diario.">
+    <title>QUEST[LAB] — Designed to adapt</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!--
+      ESQUEMA DE LA PÁGINA (cada dato aparece una sola vez)
+      01 Hero ............ promesa + índice de los 5 productos
+      02 Colección ....... un capítulo por prenda: producto + su tecnología + atributos
+                           HELIX (Feel) · AXIOM (Motion) · DRIFT (pendiente) · NIMBUS (Protection + Feel)
+      03 Quanta Trail .... el calzado en su propio capítulo (X-Ray). Sin James (manual p.5)
+      04 Campaña ......... cierre de marca con James
+      Footer
+    -->
+
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+    <!-- ============ HEADER ============ -->
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="QUEST LAB, inicio">
+        <img src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
+      </a>
+      <nav class="pill-nav" aria-label="Navegación principal">
+        <span class="pill-indicator" aria-hidden="true"></span>
+        <a href="#coleccion">Colección</a>
+        <a href="#xray">Quanta Trail</a>
+        <a href="#campana">Campaña</a>
+      </nav>
+      <a class="header-cta" href="#coleccion"><span class="lime-dot"></span>LANZAMIENTO <span aria-hidden="true">↘</span></a>
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+    </header>
+
+    <main>
+
+      <!-- ============ 01 · HERO ============ -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero-frame">
+          <div class="hero-grid" aria-hidden="true"></div>
+          <div class="hero-light" aria-hidden="true"><span></span></div>
+
+          <div class="hero-content">
+            <p class="hero-badge"><span class="lime-dot"></span>QUEST[LAB] / LANZAMIENTO 2026</p>
+            <h1 id="hero-title" class="hero-title">
+              <span class="line"><span>DESIGNED</span></span>
+              <span class="line"><span>TO <em>ADAPT</em><i class="period">.</i></span></span>
+            </h1>
+            <p class="hero-description">
+              Diseño, tecnología y funcionalidad en prendas pensadas para acompañar
+              el movimiento de cada día.
+            </p>
+            <a class="btn btn-solid" href="#coleccion">VER COLECCIÓN <span aria-hidden="true">↓</span></a>
+          </div>
+
+          <!-- Índice de productos: visibilidad inmediata del lanzamiento -->
+          <nav class="hero-index" aria-label="Productos del lanzamiento">
+            <a href="#helix">HELIX</a>
+            <a href="#axiom">AXIOM</a>
+            <a href="#drift">DRIFT</a>
+            <a href="#nimbus">NIMBUS</a>
+            <a href="#xray">QUANTA TRAIL</a>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ============ 02 · COLECCIÓN — un capítulo por prenda ============
+           Regla: cada dato aparece UNA sola vez. La tecnología vive junto a su prenda. -->
+      <section class="collection" id="coleccion" aria-labelledby="collection-title">
+        <div class="wrap">
+          <div class="kicker reveal"><span>COLECCIÓN</span><span>FEEL · MOTION · PROTECTION</span></div>
+          <div class="section-head">
+            <h2 id="collection-title" class="title reveal">La tecnología que importa<br>se siente en el uso<span class="period">.</span></h2>
+            <p class="lead-sm reveal">Cada prenda nace de una tecnología. Una idea por prenda, sin ruido.</p>
+          </div>
+        </div>
+
+        <!-- Navegación fija de la colección -->
+        <nav class="collection-nav" aria-label="Prendas de la colección">
+          <a href="#helix" class="is-active">HELIX</a>
+          <a href="#axiom">AXIOM</a>
+          <a href="#drift">DRIFT</a>
+          <a href="#nimbus">NIMBUS</a>
+        </nav>
+
+        <div class="wrap chapters">
+          <!-- HELIX -->
+          <article class="chapter" id="helix">
+            <div class="chapter-media reveal">
+              <video data-autoplay muted loop playsinline preload="none" poster="assets/video/helix-clean.jpg" src="assets/video/helix-clean.mp4"></video>
+              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            </div>
+            <div class="chapter-info">
+              <p class="chapter-num reveal">CAMISETA</p>
+              <h3 class="chapter-name reveal">HELIX</h3>
+              <div class="chapter-tech reveal"><small>TECNOLOGÍA</small><b>FEEL</b><p>Equilibrio: cómo se siente la prenda sobre la piel.</p></div>
+              <ol class="attrs reveal">
+                <li>Ultra fresh touch</li>
+                <li>Suavidad + frescura</li>
+                <li>Caída natural</li>
+                <li>Construcción ligera</li>
+              </ol>
+            </div>
+          </article>
+
+          <!-- AXIOM -->
+          <article class="chapter is-reverse" id="axiom">
+            <div class="chapter-media reveal">
+              <video data-autoplay muted loop playsinline preload="none" poster="assets/video/axiom-clean.jpg" src="assets/video/axiom-clean.mp4"></video>
+              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            </div>
+            <div class="chapter-info">
+              <p class="chapter-num reveal">CAMISETA</p>
+              <h3 class="chapter-name reveal">AXIOM</h3>
+              <div class="chapter-tech reveal"><small>TECNOLOGÍA</small><b>MOTION</b><p>Precisión: libertad para moverte sin restricciones.</p></div>
+              <ol class="attrs reveal">
+                <li>Elasticidad + recuperación</li>
+                <li><em class="hl">12%</em> elastano</li>
+                <li>Ultra motion</li>
+              </ol>
+            </div>
+          </article>
+
+          <!-- DRIFT: contenido pendiente -->
+          <article class="chapter" id="drift">
+            <div class="chapter-media slot reveal" data-label="IMAGEN / VIDEO DRIFT · PENDIENTE"></div>
+            <div class="chapter-info">
+              <p class="chapter-num reveal">CAMISETA</p>
+              <h3 class="chapter-name reveal">DRIFT</h3>
+              <div class="chapter-tech is-pending reveal"><small>TECNOLOGÍA</small><b>POR CONFIRMAR</b><p>Definición de la tecnología pendiente.</p></div>
+              <ol class="attrs is-pending reveal">
+                <li>Atributo por confirmar</li>
+                <li>Atributo por confirmar</li>
+                <li>Atributo por confirmar</li>
+              </ol>
+            </div>
+          </article>
+
+          <!-- NIMBUS -->
+          <article class="chapter is-reverse" id="nimbus">
+            <div class="chapter-media reveal">
+              <video data-autoplay muted loop playsinline preload="none" poster="assets/video/nimbus-clean.jpg" src="assets/video/nimbus-clean.mp4"></video>
+              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            </div>
+            <div class="chapter-info">
+              <p class="chapter-num reveal">CHAQUETA</p>
+              <h3 class="chapter-name reveal">NIMBUS</h3>
+              <div class="chapter-tech reveal"><small>TECNOLOGÍA</small><b>PROTECTION <i>+</i> FEEL</b><p>Protección integrada al diseño.</p></div>
+              <ol class="attrs reveal">
+                <li>Waterproof · <em class="hl">100%</em> impermeable</li>
+                <li>Soft shell</li>
+                <li>Diseñada para adaptarse</li>
+              </ol>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ 03 · X-RAY — QUANTA TRAIL ============
+           Calzado: se firma solo con QUEST[LAB]. No usar nombre ni imagen de James aquí (manual p.5). -->
+      <section class="xray" id="xray" aria-labelledby="xray-title">
+        <canvas class="topo topo-dim" aria-hidden="true"></canvas>
+        <div class="wrap">
+          <div class="kicker reveal"><span>QUANTA TRAIL / X-RAY VIEW</span><span>QUEST[LAB] / 2026</span></div>
+
+          <div class="xray-grid">
+            <div class="xray-copy">
+              <p class="xray-eyebrow reveal"><span class="lime-dot"></span>{RENDIMIENTO}</p>
+              <h2 id="xray-title" class="title reveal">Lo que no<br>se ve<span class="period">.</span></h2>
+              <p class="lead-sm reveal">Hay una tecnología que se ve, y hay una que no. La que no se ve es la que realmente importa.</p>
+              <ol class="xray-list" data-xray-list>
+                <li>Estabilidad</li>
+                <li>Tracción</li>
+                <li>Adaptación natural al pie</li>
+                <li>Frescura prolongada</li>
+                <li>Control de temperatura</li>
+              </ol>
+            </div>
+
+            <!-- Escáner: la capa "scan" está alineada con la foto y se revela en la franja -->
+            <div class="scanner reveal" data-scanner>
+              <img class="scan-base" src="assets/producto/quanta-03.jpg" alt="Quanta Trail, par de tenis" loading="lazy">
+              <img class="scan-layer" src="assets/producto/quanta-03-scan.jpg" alt="" aria-hidden="true" loading="lazy">
+              <span class="scan-line" aria-hidden="true"><b data-scan-readout>SCAN 000%</b></span>
+              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+              <span class="scanner-tag">MUEVE EL CURSOR PARA ESCANEAR</span>
+            </div>
+
+            <figure class="xray-official reveal">
+              <img src="assets/producto/quanta-xray.jpg" alt="Vista de rayos X del Quanta Trail" loading="lazy">
+              <figcaption><span>X-RAY VIEW</span><span>QUANTA TRAIL</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 04 · CAMPAÑA ============ -->
+      <section class="campaign" id="campana" aria-labelledby="campaign-title">
+        <!-- Efecto vidrio esmerilado: la foto queda borrosa y una ventana nítida revela la mirada -->
+        <div class="campaign-frame" data-frost>
+          <img class="frost-base" src="assets/fotos/james-campana.jpg" alt="James Rodríguez, fotografía de campaña" loading="lazy">
+          <img class="frost-sharp" src="assets/fotos/james-campana.jpg" alt="" aria-hidden="true" loading="lazy">
+          <span class="frost-noise" aria-hidden="true"></span>
+          <div class="frost-window" aria-hidden="true">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <p class="frost-text top"><span class="hl">//</span> NOTHING TO PROVE.</p>
+            <p class="frost-text bottom">DESIGNED TO ADAPT.</p>
+          </div>
+          <img class="campaign-logo" src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
+
+          <!-- Eslogan oficial: usar el archivo gráfico, nunca texto en vivo (manual p.9) -->
+          <div class="slogan-slot">
+            <h2 id="campaign-title" class="visually-hidden">Prove yourself. Nothing to prove.</h2>
+            <div class="slot slot-dark" data-label="PROVE YOURSELF / ARCHIVO OFICIAL"></div>
+          </div>
+
+          <!-- Identificador: solo con fotografía de James (manual p.5) -->
+          <div class="project-id"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+      <img class="footer-logo" src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
+      <div class="footer-bottom">
+        <span>QUEST[LAB] / 2026</span>
+        <span>ORIGIN: CALI / CO · <span class="hl">03°25'49"N / 076°31'11"W</span></span>
+        <a href="#inicio">VOLVER ARRIBA ↑</a>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
