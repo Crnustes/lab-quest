@@ -733,6 +733,19 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .vt-buy:hover { background: var(--blue-deep); border-color: var(--blue-deep); color: var(--white); }
 
 /* =========================================================
+   FICHA OFICIAL DE CADA PRENDA — fit / material + tecnologías con su beneficio
+   ========================================================= */
+.pv-specs { margin: 0 0 1.6rem; display: grid; gap: 0.45rem; }
+.pv-specs div { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.8rem; align-items: baseline; }
+.pv-specs dt { font-size: 9px; letter-spacing: 0.16em; color: var(--gargoyle); }
+.pv-specs dd { margin: 0; font-size: 13px; font-weight: 500; }
+.pv-attrs li { display: grid; gap: 0.25rem; }
+.pv-attrs li b { font-size: clamp(13px, 1.15vw, 15px); font-weight: 700; letter-spacing: 0.04em; }
+.pv-attrs li span { font-size: 12px; font-weight: 400; color: rgba(255,255,255,.62); line-height: 1.4; }
+.xray-list li em { display: grid; gap: 0.2rem; font-style: normal; }
+.xray-list li em b { font-size: 11px; letter-spacing: 0.14em; font-weight: 700; }
+
+/* =========================================================
    FONDO TOPOGRÁFICO (referente IMG_3052)
    ========================================================= */
 .topo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;

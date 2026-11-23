@@ -59,10 +59,22 @@ El bosquejo de baja fidelidad con la justificación de cada sección está en `b
 
 ## Productos y tecnologías
 
-Fuente: videos de campaña y manual de marca.
+Fuente: fichas oficiales de producto del cliente (atributos definitivos).
 
-| Producto | Categoría | Tecnología | Atributos |
+| Producto | Fit | Material | Tecnologías |
 |---|---|---|---|
+| LIQUID FORM | Slim, manga larga | *No indicado* | Expand Motion 4-Way · Light Motion · Protection |
+| HELIX | Slim | 50% algodón / 50% viscosa | Ultra Fresh Touch · Acabado Seamless |
+| PULSE | Slim | 92% poliéster / 8% elastano | Light Motion · Ultra Fresh Touch · Protection · Acabado Seamless |
+| AXIOM | Regular | 88% algodón / 12% elastano | Ultra Motion · Ultra Fresh Touch · Acabado Seamless |
+| DRIFT | Loose | 100% algodón peach de alto gramaje | Smooth Finish · Soft Touch · Cuello con costuras expuestas |
+| VECTOR | Modern Slim | 78% poliamida / 22% elastano | Ultra Motion · Light Motion · Protection |
+| NIMBUS | Slim | 100% poliéster técnico | Waterproof · Protection · Soft Shell |
+| QUANTA TRAIL | — | — | Tracción · Estabilidad · Adaptabilidad · Confort |
+
+En la landing cada tecnología aparece con su beneficio corto (ficha de la colección) y solo el nombre en la lectura técnica sobre la imagen.
+
+---|---|---|---|
 | HELIX | Camiseta | FEEL (equilibrio) | Ultra fresh touch · Suavidad + frescura · Caída natural · Construcción ligera |
 | AXIOM | Camiseta | MOTION (precisión) | Elasticidad + recuperación · 12% elastano · Ultra motion |
 | DRIFT | Camiseta | *Por confirmar* | *Por confirmar* |
