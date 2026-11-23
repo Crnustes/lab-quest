@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bosquejo — Landing Lanzamiento 2026</title>
+<style>
+  /* Bosquejo de baja fidelidad: solo estructura y contenido, sin diseño final */
+  :root {
+    --ink: #1d1d1f; --mute: #6e6e73; --line: #c9c9cc; --box: #f2f2f4; --box2: #e4e4e8; --paper: #ffffff; --bg: #f7f7f8;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.6 var(--sans); }
+  h1, h2, h3, h4, p, ul, ol { margin: 0; }
+  .page { width: min(100% - 32px, 1240px); margin: 0 auto; padding: 56px 0 96px; }
+
+  /* Encabezado del documento */
+  .doc-head { display: grid; gap: 14px; margin-bottom: 40px; }
+  .doc-head small { font: 600 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+  .doc-head h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.02em; }
+  .doc-head p { max-width: 760px; color: var(--mute); }
+
+  /* Flujo */
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 16px; }
+  .flow b { padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font-size: 13px; }
+  .flow span { color: var(--mute); }
+  .flow i { font-style: normal; display: block; font: 400 11px var(--mono); color: var(--mute); margin-top: 2px; text-align: center; }
+  .flow .step { display: grid; justify-items: center; }
+  .rule { padding: 16px 20px; border-left: 3px solid var(--ink); background: var(--paper); border-radius: 0 12px 12px 0; margin-bottom: 56px; }
+
+  /* Sección del bosquejo: wireframe + anotaciones */
+  .sec { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px; align-items: start; padding: 40px 0; border-top: 1px solid var(--line); }
+  .sec-id { font: 600 11px/1 var(--mono); letter-spacing: .12em; color: var(--mute); text-transform: uppercase; }
+  .notes h2 { font-size: 26px; letter-spacing: -0.02em; margin: 8px 0 6px; }
+  .notes .goal { font-size: 17px; margin-bottom: 18px; }
+  .notes h4 { font: 600 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin: 18px 0 8px; }
+  .notes ul { padding-left: 18px; }
+  .notes li + li { margin-top: 4px; }
+  .notes .why { padding: 14px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
+  .notes .warn { padding: 12px 14px; border: 1.5px dashed var(--ink); border-radius: 12px; font-size: 14px; margin-top: 14px; }
+  .notes .todo { color: var(--mute); }
+
+  /* Elementos de wireframe */
+  .wf { background: var(--paper); border: 1.5px solid var(--ink); border-radius: 12px; padding: 18px; display: grid; gap: 12px; position: sticky; top: 16px; }
+  .wf-img { position: relative; min-height: 90px; border: 1.5px solid var(--line); border-radius: 8px; background:
+      linear-gradient(to top right, transparent calc(50% - 1px), var(--line) 50%, transparent calc(50% + 1px)),
+      linear-gradient(to top left, transparent calc(50% - 1px), var(--line) 50%, transparent calc(50% + 1px)), var(--box); }
+  .wf-img > span { position: absolute; inset: auto 8px 8px 8px; font: 500 10px/1.3 var(--mono); color: var(--mute); text-align: center; background: var(--box); padding: 3px 6px; border-radius: 4px; }
+  .wf-line { height: 8px; border-radius: 4px; background: var(--box2); }
+  .wf-h { font: 800 22px/1.05 var(--sans); letter-spacing: -0.02em; }
+  .wf-h.xl { font-size: 34px; }
+  .wf-label { font: 600 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+  .wf-btn { justify-self: start; padding: 7px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font: 600 11px/1 var(--mono); }
+  .wf-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .wf-pill { padding: 6px 10px; border: 1.5px solid var(--line); border-radius: 999px; font: 600 10px/1 var(--mono); }
+  .wf-pill.on { border-color: var(--ink); background: var(--ink); color: #fff; }
+  .wf-tag { display: inline-block; padding: 3px 8px; border: 1px dashed var(--mute); border-radius: 6px; font: 500 10px/1.2 var(--mono); color: var(--mute); }
+  .wf-grid { display: grid; gap: 8px; }
+  .center { text-align: center; justify-items: center; }
+  .wf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: center; }
+  .wf-list { display: grid; gap: 6px; }
+  .wf-list div { padding: 6px 0; border-top: 1px solid var(--line); font: 500 12px var(--mono); }
+  .wf-tech { padding: 8px 0; border-top: 2px solid var(--ink); }
+  .wf-tech b { display: block; font-size: 18px; font-weight: 400; }
+  .wf-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .wf-mini > div { border: 1px dashed var(--line); border-radius: 8px; padding: 8px; display: grid; gap: 6px; }
+  .bento { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 44px; gap: 6px; }
+  .bento .wf-img { min-height: 0; }
+
+  /* Tabla final */
+  table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 600 11px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); background: var(--bg); }
+  .block-title { font-size: 22px; margin: 56px 0 14px; }
+
+  @media (max-width: 860px) {
+    .sec { grid-template-columns: 1fr; }
+    .wf { position: static; }
+    .wf-split { grid-template-columns: 1fr; }
+    .flow { justify-content: flex-start; }
+    table { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="doc-head">
+    <small>Bosquejo de estructura · Landing lanzamiento 2026</small>
+    <h1>Qué va en cada sección y por qué</h1>
+    <p>Este documento muestra la estructura de la página sin el diseño final: cajas para imágenes y video, líneas para textos. El objetivo es acordar el contenido y el orden antes de pulir lo visual.</p>
+  </header>
+
+  <!-- Flujo general -->
+  <div class="flow" aria-label="Orden de la página">
+    <div class="step"><b>Hero</b><i>la promesa</i></div><span>→</span>
+    <div class="step"><b>Colección</b><i>el producto</i></div><span>→</span>
+    <div class="step"><b>Quanta Trail</b><i>el calzado</i></div><span>→</span>
+    <div class="step"><b>Lifestyle</b><i>el uso real</i></div><span>→</span>
+    <div class="step"><b>James · Looks</b><i>el embajador</i></div><span>→</span>
+    <div class="step"><b>Campaña</b><i>la marca</i></div>
+  </div>
+  <p class="rule"><b>Regla de la página:</b> el producto es el protagonista y <b>cada dato aparece una sola vez</b>. La tecnología se explica dentro de la prenda que la usa, no en una sección aparte. La página no lleva menú ni footer: es un recorrido lineal de principio a fin, y la campaña es el cierre. Se divide en dos bloques: <b>producto</b> (Colección y Quanta Trail) y <b>personas</b> (Lifestyle, James y campaña).</p>
+
+  <!-- ===== 01 HERO ===== -->
+  <section class="sec">
+    <div class="wf center">
+      <span class="wf-tag">Etiqueta: Lanzamiento 2026</span>
+      <div class="wf-h xl">DESIGNED<br>TO ADAPT.</div>
+      <div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:50%"></div>
+      <span class="wf-btn" style="justify-self:center">VER COLECCIÓN ↓</span>
+      <div class="wf-row" style="justify-content:center;margin-top:8px">
+        <span class="wf-pill">HELIX</span><span class="wf-pill">AXIOM</span><span class="wf-pill">DRIFT</span><span class="wf-pill">NIMBUS</span><span class="wf-pill">QUANTA TRAIL</span>
+      </div>
+      <span class="wf-label">↑ índice de los 5 productos</span>
+    </div>
+    <div class="notes">
+      <p class="sec-id">Sección 01</p>
+      <h2>Hero</h2>
+      <p class="goal">Decir qué es la marca y qué se lanza en menos de 3 segundos.</p>
+      <h4>Qué va</h4>
+      <ul>
+        <li>Titular de marca: <b>Designed to adapt.</b></li>
+        <li>Una frase de apoyo (diseño, tecnología, funcionalidad)</li>
+        <li>Botón "Ver colección"</li>
+        <li>Índice con los 5 nombres de producto, que llevan a cada uno</li>
+      </ul>
+      <h4>Por qué aquí</h4>
+      <p class="why">Es lo primero que se ve: la promesa abre la historia y el índice da visibilidad inmediata a <b>todos</b> los productos. Quien ya sabe qué busca salta directo; quien no, sigue bajando. Como la página no tiene menú, este índice es la única navegación y cumple esa función.</p>
+    </div>
+  </section>
+
+  <!-- ===== 02 COLECCIÓN ===== -->
+  <section class="sec">
+    <div class="wf">
+      <span class="wf-label">Título de la sección + barra fija de prendas</span>
+      <div class="wf-h">La tecnología que importa se siente en el uso.</div>
+      <div class="wf-row"><span class="wf-pill on">HELIX</span><span class="wf-pill">AXIOM</span><span class="wf-pill">DRIFT</span><span class="wf-pill">NIMBUS</span></div>
+      <span class="wf-label" style="margin-top:6px">Capítulo de una prenda (se repite 4 veces, alternando lados)</span>
+      <div class="wf-split">
+        <div class="wf-img" style="min-height:220px"><span>VIDEO / FOTO DE LA PRENDA · 4:5</span></div>
+        <div class="wf-grid">
+          <span class="wf-label">Categoría</span>
+          <div class="wf-h xl">NOMBRE</div>
+          <div class="wf-tech"><span class="wf-label">Tecnología</span><b>FEEL / MOTION / PROTECTION</b><div class="wf-line" style="width:80%;margin-top:6px"></div></div>
+          <div class="wf-list"><div>Atributo 1</div><div>Atributo 2</div><div>Atributo 3</div></div>
+        </div>
+      </div>
+      <div class="wf-mini">
+        <div><span class="wf-label">HELIX · camiseta</span><span>Tecnología: Feel</span></div>
+        <div><span class="wf-label">AXIOM · camiseta</span><span>Tecnología: Motion</span></div>
+        <div><span class="wf-label">DRIFT · camiseta</span><span class="todo">Pendiente</span></div>
+        <div><span class="wf-label">NIMBUS · chaqueta</span><span>Protection + Feel</span></div>
+      </div>
+    </div>
+    <div class="notes">
+      <p class="sec-id">Sección 02 · la más importante</p>
+      <h2>Colección</h2>
+      <p class="goal">Darle protagonismo a cada prenda y hacer que su tecnología se entienda como un beneficio.</p>
+      <h4>Qué va (en cada capítulo, en este orden)</h4>
+      <ol style="padding-left:18px">
+        <li><b>Nombre del producto</b>, en grande: es lo primero que se lee.</li>
+        <li><b>Su tecnología</b> con una frase que la explica.</li>
+        <li><b>Atributos concretos</b> en lista (ej. 12% elastano, 100% impermeable).</li>
+        <li>Un video o foto del producto, sin texto encima.</li>
+      </ol>
+      <h4>Por qué aquí y así</h4>
+      <p class="why">Va justo después de la promesa porque el producto es lo que se lanza. Cada prenda tiene su propio capítulo a pantalla completa, sin pestañas que escondan productos. La tecnología vive <b>dentro</b> de la prenda: así no hace falta una sección de tecnologías aparte que repita los mismos datos. La barra fija le muestra a la persona en qué prenda está.</p>
+      <h4>Pendiente</h4>
+      <p class="todo">DRIFT: imagen o video, tecnología y atributos.</p>
+    </div>
+  </section>
+
+  <!-- ===== 03 QUANTA TRAIL ===== -->
+  <section class="sec">
+    <div class="wf">
+      <div style="display:grid;grid-template-columns:1fr 1.1fr .8fr;gap:10px;align-items:center">
+        <div class="wf-grid">
+          <span class="wf-label">{Rendimiento}</span>
+          <div class="wf-h">Lo que no se ve.</div>
+          <div class="wf-line"></div>
+          <div class="wf-list"><div>Estabilidad</div><div>Tracción</div><div>Adaptación al pie</div><div>Frescura</div><div>Temperatura</div></div>
+        </div>
+        <div class="wf-img" style="min-height:240px"><span>ESCÁNER<br>foto + franja de rayos X</span></div>
+        <div class="wf-img" style="min-height:200px"><span>RADIOGRAFÍA OFICIAL</span></div>
+      </div>
+      <span class="wf-label">Firma: solo QUEST[LAB]</span>
+    </div>
+    <div class="notes">
+      <p class="sec-id">Sección 03</p>
+      <h2>Quanta Trail</h2>
+      <p class="goal">Presentar el calzado con su propio lenguaje: la tecnología interna.</p>
+      <h4>Qué va</h4>
+      <ul>
+        <li>Titular "Lo que no se ve" + una frase</li>
+        <li>Lista de atributos de rendimiento</li>
+        <li>Escáner interactivo: la foto del tenis con una franja que revela la versión de rayos X</li>
+        <li>La radiografía oficial que pidió el cliente</li>
+      </ul>
+      <h4>Por qué aparte y aquí</h4>
+      <p class="why">Es otra categoría (calzado) y se cuenta distinto. Va justo después de las prendas para cerrar el bloque de producto: primero se ve todo lo que se lanza y después empieza la parte humana (Lifestyle, James, campaña). Así el calzado queda lejos de las secciones con James. El tenis aparece solo 3 veces en toda la página: en el índice del hero, aquí en el escáner y en la radiografía.</p>
+      <p class="warn"><b>Manual de marca:</b> en piezas de calzado no se usa el nombre ni la imagen de James. Esta sección se firma solo con QUEST[LAB].</p>
+    </div>
+  </section>
+
+  <!-- ===== 04 LIFESTYLE ===== -->
+  <section class="sec">
+    <div class="wf">
+      <div class="bento">
+        <div class="wf-img" style="grid-column:1/6;grid-row:1/5"><span>FOTO 1 · VERTICAL<br>prenda protagonista</span></div>
+        <div style="grid-column:6/13;grid-row:1/2;display:grid;gap:6px;align-content:end"><div class="wf-h">Movimiento que no se detiene.</div></div>
+        <div class="wf-img" style="grid-column:6/13;grid-row:2/5"><span>FOTO 2 · HORIZONTAL · ciudad</span></div>
+        <div class="wf-img" style="grid-column:1/5;grid-row:5/8"><span>FOTO 3 · en uso</span></div>
+        <div class="wf-img" style="grid-column:5/9;grid-row:5/8"><span>FOTO 4 · detalle</span></div>
+        <div class="wf-img" style="grid-column:9/13;grid-row:5/8"><span>FOTO 5 · movimiento</span></div>
+        <div class="wf-img" style="grid-column:1/13;grid-row:8/11"><span>FOTO 6 · PANORÁMICA · contexto urbano</span></div>
+      </div>
+      <span class="wf-label">Cada foto lleva una etiqueta: nombre de la prenda + contexto</span>
+    </div>
+    <div class="notes">
+      <p class="sec-id">Sección 04</p>
+      <h2>Lifestyle</h2>
+      <p class="goal">Mostrar las prendas en la vida real: el "para qué" después del "qué".</p>
+      <h4>Qué va</h4>
+      <ul>
+        <li>Grilla editorial de 6 fotos con tamaños distintos (vertical, horizontal, detalle, panorámica)</li>
+        <li>Un titular corto y una línea de texto</li>
+        <li>Debajo de cada foto: nombre de la prenda + contexto (ciudad, rutina, trayecto)</li>
+        <li><b>Sin atributos ni datos técnicos</b>: ya se dijeron en la Colección</li>
+      </ul>
+      <h4>Por qué aquí</h4>
+      <p class="why">Después de ver todos los productos y su tecnología, la persona necesita verlos en uso. Abre la parte humana de la página: primero personas en su día a día, después James, al final la campaña. También le da un respiro visual a la página: fotos grandes y casi nada de texto después de una sección densa en datos.</p>
+      <p class="warn">Si una foto es de James, que no aparezca calzado en el encuadre (regla del manual).</p>
+      <h4>Pendiente</h4>
+      <p class="todo">Fotos finales (las fotos DSC recibidas tienen marca de agua).</p>
+    </div>
+  </section>
+
+  <!-- ===== 05 JAMES · LOOKS ===== -->
+  <section class="sec">
+    <div class="wf">
+      <div class="wf-row" style="justify-content:space-between;align-items:end">
+        <div class="wf-h">James, con cada prenda.</div>
+        <span class="wf-tag">PROJECT<br>James Rodríguez</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:150px 150px;gap:8px">
+        <div class="wf-img" style="grid-row:1/3"><span>LOOK 1 · VERTICAL GRANDE<br>James con HELIX</span></div>
+        <div class="wf-img"><span>LOOK 2 · James con AXIOM</span></div>
+        <div class="wf-img"><span>LOOK 3 · James con NIMBUS</span></div>
+        <div class="wf-img"><span>LOOK 4 · James con DRIFT</span></div>
+        <div class="wf-img"><span>LOOK 5 · retrato / detalle</span></div>
+      </div>
+      <div class="wf-row">
+        <span class="wf-pill">HELIX</span><span class="wf-pill">AXIOM</span><span class="wf-pill">NIMBUS</span><span class="wf-pill">DRIFT</span>
+      </div>
+      <span class="wf-label">↑ Cada foto lleva solo el nombre de la prenda, que enlaza a su capítulo en la Colección</span>
+    </div>
+    <div class="notes">
+      <p class="sec-id">Sección 05</p>
+      <h2>James · Looks</h2>
+      <p class="goal">Mostrar al embajador con cada prenda de la colección.</p>
+      <h4>Qué va</h4>
+      <ul>
+        <li>4 a 5 fotos de James, cada una con una prenda distinta (HELIX, AXIOM, NIMBUS, DRIFT)</li>
+        <li>Una foto protagonista más grande y el resto en grilla</li>
+        <li>En cada foto, solo el nombre de la prenda, que enlaza a su capítulo</li>
+        <li>Identificador <b>PROJECT James Rodríguez</b></li>
+        <li><b>Sin atributos ni textos largos</b>: los datos ya están en la Colección</li>
+      </ul>
+      <h4>Por qué aquí</h4>
+      <p class="why">Después de ver las prendas en el uso cotidiano (Lifestyle), James las lleva puestas: la colección pasa de "ropa en la calle" a "la ropa de alguien que no necesita demostrar nada". Es la antesala de la campaña: las dos secciones con James quedan juntas y forman el cierre emocional de la página.</p>
+      <p class="warn"><b>Manual de marca:</b> solo prendas, nunca calzado. Hay que encuadrar o recortar las fotos de cuerpo entero para que no aparezcan los zapatos. Esta sección queda separada de Quanta Trail por Lifestyle.</p>
+      <h4>Material disponible</h4>
+      <p class="todo">Hay 26 fotos de estudio de James (carpeta "Fotos James"): camiseta blanca, polo, chaqueta gris y chaqueta azul con capucha. Falta confirmar qué prenda de la colección es cada una.</p>
+    </div>
+  </section>
+
+  <!-- ===== 06 CAMPAÑA ===== -->
+  <section class="sec">
+    <div class="wf">
+      <div class="wf-img" style="min-height:260px"><span>FOTO DE JAMES · borrosa, con una ventana nítida en la mirada</span></div>
+      <div class="wf-row" style="justify-content:space-between">
+        <span class="wf-tag">LOGO</span><span class="wf-tag">// NOTHING TO PROVE.</span>
+      </div>
+      <div class="wf-row" style="justify-content:space-between;align-items:center">
+        <span class="wf-tag">ESLOGAN OFICIAL · PROVE YOURSELF (archivo)</span>
+        <span class="wf-tag">PROJECT<br>James Rodríguez</span>
+      </div>
+    </div>
+    <div class="notes">
+      <p class="sec-id">Sección 06</p>
+      <h2>Campaña</h2>
+      <p class="goal">Cerrar con la emoción y dejar la marca en la memoria.</p>
+      <h4>Qué va</h4>
+      <ul>
+        <li>Fotografía de James (efecto vidrio esmerilado)</li>
+        <li>Logo QUEST[LAB]</li>
+        <li>"// NOTHING TO PROVE."</li>
+        <li>Eslogan <b>PROVE YOURSELF</b> desde el archivo oficial</li>
+        <li>Identificador <b>PROJECT James Rodríguez</b></li>
+      </ul>
+      <h4>Por qué al final</h4>
+      <p class="why">Primero la razón (productos y tecnología), al final la emoción. La campaña no vende un producto puntual: le da sentido a toda la colección. Terminar con James deja la marca, no un dato técnico, como lo último que se recuerda. Por eso no hay footer después: la campaña es la última imagen.</p>
+      <p class="warn">El identificador PROJECT James Rodríguez solo se usa porque aquí hay una foto de James. Esta sección no muestra calzado.</p>
+      <h4>Pendiente</h4>
+      <p class="todo">Archivo oficial del eslogan PROVE YOURSELF.</p>
+    </div>
+  </section>
+
+  <!-- ===== Dónde vive cada dato ===== -->
+  <h3 class="block-title">Dónde aparece cada dato (una sola vez)</h3>
+  <table>
+    <thead><tr><th>Dato</th><th>Dónde aparece</th><th>Dónde NO se repite</th></tr></thead>
+    <tbody>
+      <tr><td>Nombres de los 5 productos</td><td>Índice del hero (navegación)</td><td>—</td></tr>
+      <tr><td>Tecnologías (Feel, Motion, Protection)</td><td>Dentro del capítulo de cada prenda</td><td>No hay sección de tecnologías aparte</td></tr>
+      <tr><td>Atributos de prendas (12% elastano, 100% impermeable…)</td><td>Colección</td><td>Lifestyle solo muestra prenda + contexto</td></tr>
+      <tr><td>Atributos del calzado</td><td>Quanta Trail</td><td>No aparecen en la Colección</td></tr>
+      <tr><td>James Rodríguez</td><td>James · Looks y Campaña (juntas)</td><td>Nunca junto al calzado; separado de Quanta Trail por Lifestyle</td></tr>
+      <tr><td>Eslogan PROVE YOURSELF</td><td>Campaña (archivo oficial)</td><td>No se escribe como texto</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="block-title">Pendientes de contenido</h3>
+  <table>
+    <thead><tr><th>Qué falta</th><th>Sección</th></tr></thead>
+    <tbody>
+      <tr><td>DRIFT: imagen o video, tecnología y atributos</td><td>Colección</td></tr>
+      <tr><td>6 fotos lifestyle finales, sin marca de agua</td><td>Lifestyle</td></tr>
+      <tr><td>Elegir 4–5 fotos de James, una por prenda, sin calzado en el encuadre</td><td>James · Looks</td></tr>
+      <tr><td>Archivo oficial del eslogan PROVE YOURSELF</td><td>Campaña</td></tr>
+      <tr><td>Confirmar la frase que define cada tecnología</td><td>Colección</td></tr>
+    </tbody>
+  </table>
+
+</main>
+</body>
+</html>

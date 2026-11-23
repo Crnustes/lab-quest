@@ -7,44 +7,13 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
-  /* ---------- Header: fondo al bajar, indicador del menú, menú móvil, progreso ---------- */
-  function header() {
-    const head = $(".site-header");
-    const ind = $(".pill-indicator");
-    const links = $$(".pill-nav a");
-    const toggle = $(".menu-toggle");
+  /* ---------- Barra de progreso de scroll (la página no tiene menú ni footer) ---------- */
+  function progress() {
     const bar = $(".scroll-progress span");
-
     addEventListener("scroll", () => {
-      head.classList.toggle("is-scrolled", scrollY > 40);
       const max = document.documentElement.scrollHeight - innerHeight;
       bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
     }, { passive: true });
-
-    const moveTo = (a) => {
-      if (!a) { ind.style.opacity = 0; return; }
-      ind.style.opacity = 1;
-      ind.style.width = a.offsetWidth + "px";
-      ind.style.transform = `translateX(${a.offsetLeft}px)`;
-    };
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (!en.isIntersecting) return;
-        links.forEach((l) => l.classList.toggle("is-active", l.getAttribute("href") === "#" + en.target.id));
-        moveTo(links.find((l) => l.classList.contains("is-active")));
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    $$("main section[id]").forEach((s) => io.observe(s));
-    addEventListener("resize", () => moveTo(links.find((l) => l.classList.contains("is-active"))));
-
-    toggle.addEventListener("click", () => {
-      const open = head.classList.toggle("menu-open");
-      toggle.setAttribute("aria-expanded", open);
-    });
-    links.forEach((l) => l.addEventListener("click", () => {
-      head.classList.remove("menu-open");
-      toggle.setAttribute("aria-expanded", "false");
-    }));
   }
 
   /* ---------- Aparición suave al hacer scroll ---------- */
@@ -62,16 +31,37 @@
     $$(".reveal").forEach((el) => io.observe(el));
   }
 
-  /* ---------- 02 · Colección: navegación fija que marca la prenda en pantalla ---------- */
-  function collectionNav() {
-    const links = $$(".collection-nav a");
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (!en.isIntersecting) return;
-        links.forEach((l) => l.classList.toggle("is-active", l.getAttribute("href") === "#" + en.target.id));
+  /* ---------- 02 · Colección: visor de una prenda + menú de íconos ---------- */
+  function productViewer() {
+    const section = $("#coleccion");
+    const items = $$(".pv", section);
+    const tabs = $$(".pv-menu button", section);
+    let inView = false;
+
+    // Solo se reproduce el video de la prenda visible
+    const playActive = () => {
+      items.forEach((it) => {
+        const v = $("video", it);
+        if (!v) return;
+        if (it.classList.contains("is-active") && inView && !reduceMotion) { v.preload = "auto"; v.play().catch(() => {}); }
+        else v.pause();
       });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    $$(".chapter").forEach((c) => io.observe(c));
+    };
+    const show = (id) => {
+      items.forEach((it) => it.classList.toggle("is-active", it.dataset.pv === id));
+      tabs.forEach((t) => { const on = t.dataset.go === id; t.classList.toggle("is-active", on); t.setAttribute("aria-selected", on); });
+      playActive();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => show(t.dataset.go));
+      // Flechas del teclado para pasar de una prenda a otra
+      t.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        const n = tabs[(i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length];
+        n.focus(); show(n.dataset.go);
+      });
+    });
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; playActive(); }, { threshold: 0.25 }).observe($(".pv-stage", section));
   }
 
   /* ---------- Videos: se reproducen solo cuando están en pantalla ---------- */
@@ -222,11 +212,53 @@
     })();
   }
 
-  header();
+  /* ---------- Lifestyle: parallax suave de las fotos con el scroll ---------- */
+  function lifestyleParallax() {
+    if (reduceMotion) return;
+    const items = $$(".ls-grid-5 .ls-item");
+    if (!items.length) return;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      items.forEach((it, i) => {
+        const r = it.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight) return;
+        const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight; // -1 … 1
+        const amp = i % 2 ? 26 : 40; // ritmos distintos por foto
+        it.style.setProperty("--py", (p * -amp).toFixed(1) + "px");
+      });
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+
+  /* ---------- James · Looks: franjas + estela en la foto principal, ligadas al scroll ---------- */
+  function looks() {
+    const el = $("[data-look-stripes]");
+    if (!el) return;
+    if (reduceMotion) { el.style.setProperty("--stripe", "24px"); el.style.setProperty("--ghost-op", "0"); return; }
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const r = el.getBoundingClientRect();
+      const p = clamp((innerHeight - r.top) / (innerHeight + r.height), 0, 1);
+      const reveal = clamp((p - 0.04) / 0.3, 0, 1); // termina de revelarse cuando la foto ya está en pantalla
+      el.style.setProperty("--stripe", (reveal * 24).toFixed(2) + "px");
+      el.style.setProperty("--ghost-x", ((1 - reveal) * 22 + 3).toFixed(2) + "%");
+      el.style.setProperty("--ghost-op", (1 - reveal * 0.65).toFixed(2));
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener("resize", update);
+    update();
+  }
+
+  progress();
+  lifestyleParallax();
+  looks();
   reveals();
   $$(".topo").forEach(topo);
   scanner();
   frost();
-  collectionNav();
+  productViewer();
   videos();
 })();

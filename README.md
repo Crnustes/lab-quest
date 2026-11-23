@@ -28,10 +28,19 @@ assets/      → logo, tipografías, fotos y videos optimizados para web
 | 01 | **Hero** | La promesa | "Designed to adapt" + índice de los 5 productos |
 | 02 | **Colección** | El producto como protagonista | Un capítulo por prenda: HELIX, AXIOM, DRIFT, NIMBUS |
 | 03 | **Quanta Trail** | El calzado, en su propio capítulo | Escáner de rayos X + radiografía oficial |
-| 04 | **Campaña** | El cierre de marca | James Rodríguez con efecto vidrio esmerilado |
-| — | Footer | | Logo, origen y coordenadas |
+| 04 | **Lifestyle** | Las prendas en uso real | Grilla editorial de 6 fotos (pendientes) |
+| 05 | **James · Looks** | El embajador con cada prenda | Galería de 5 fotos de James (sin calzado) |
+| 06 | **Campaña** | El cierre de marca | James Rodríguez con efecto vidrio esmerilado |
 
-**Recorrido:** promesa → producto → tecnología dentro del producto → calzado aparte → marca.
+Dos bloques: **producto** (01–03) y **personas** (04–06). James nunca queda junto al calzado:
+Lifestyle separa Quanta Trail de las secciones con James.
+
+La página **no lleva menú ni footer**: es un recorrido lineal y la campaña es el cierre.
+El índice de productos del hero es la única navegación.
+
+**Recorrido:** promesa → producto → calzado → uso real → embajador → marca.
+
+El bosquejo de baja fidelidad con la justificación de cada sección está en `bosquejo.html`.
 
 ### Por qué este orden
 
@@ -42,8 +51,9 @@ assets/      → logo, tipografías, fotos y videos optimizados para web
    3. sus atributos concretos.
 
    La tecnología vive **junto a su prenda** y no en una sección aparte. Así se lee como un beneficio real del producto y no se repite información.
-3. **Quanta Trail.** Es otra categoría y se cuenta distinto ("lo que no se ve"). Además, el manual prohíbe asociar el nombre o la imagen de James con calzado, por eso va separado y firmado solo con QUEST[LAB].
-4. **Campaña.** Primero la razón (producto y tecnología) y al final la emoción (James / "Nothing to prove"). La campaña le da sentido a toda la colección.
+3. **Lifestyle.** Después de ver cada prenda aislada, se ven en uso real. Es el puente entre producto (razón) y campaña (emoción). Sin datos técnicos: ya se dijeron en la Colección.
+4. **Quanta Trail.** Es otra categoría y se cuenta distinto ("lo que no se ve"). Además, el manual prohíbe asociar el nombre o la imagen de James con calzado, por eso va separado y firmado solo con QUEST[LAB].
+5. **Campaña.** Primero la razón (producto y tecnología) y al final la emoción (James / "Nothing to prove"). La campaña le da sentido a toda la colección.
 
 ---
 
@@ -64,7 +74,8 @@ Fuente: videos de campaña y manual de marca.
 ## Reglas del manual aplicadas
 
 - **Paleta:** Black 40% · White 30% · Jet Black 12% · Cloud Dancer 8% · Gargoyle 8% · **Lime Green 2%**.
-- **Lime Green** solo en acentos mínimos: datos clave (12%, 100%), códigos (SCAN 063%, coordenadas), puntos indicadores y la barra de progreso. Nunca en fondos, bloques, logo, eslogan ni titulares.
+- **QL Blue (nuevo color aprobado):** #3d5468 · claro #506880 · profundo #19324e. Se usa en fotografía: barrido de luz y estela en Lifestyle, color al pasar el cursor y fotos con luz azul (se conservan parcialmente en color). Se usa como segundo color de acento en detalles pequeños (códigos técnicos, viñetas, interruptor, línea de escaneo, contexto de fotos, botón de compra al pasar el cursor) y en el degradado del banner final. Tono de texto sobre negro: #8ea3bb. No se usa en fondos de sección, logo, eslogan ni titulares.
+- **Lime Green** solo en acentos mínimos: datos clave (12%, 100%), códigos (SCAN 063%), puntos indicadores y la barra de progreso. Nunca en fondos, bloques, logo, eslogan ni titulares.
 - **Tipografía:** JetBrains Mono (Light, Medium, SemiBold, ExtraBold), incluida en `assets/fonts`.
 - **Logo:** siempre plano, sin efectos. En fondos oscuros se invierte a blanco.
 - **PROVE YOURSELF** se usa siempre desde el archivo oficial, nunca como texto en vivo. Hay un espacio reservado en la sección Campaña.
@@ -81,6 +92,8 @@ Fuente: videos de campaña y manual de marca.
 | Aparición suave al hacer scroll | Toda la página | — |
 | Título que sube al cargar + haz de luz | Hero | Landing DeFi / Joel Volkmer |
 | Navegación fija que marca la prenda en pantalla | Colección | Video Moonwalkers |
+| Grilla editorial, fotos que pasan de borrosas a nítidas | Lifestyle | Find Your Focus |
+| Revelado por franjas + estela de movimiento + foco | James · Looks | DYNAMIC / Castseed |
 | Videos en blanco y negro que solo se reproducen en pantalla | Colección | Lovy-tech |
 | Escáner de rayos X que sigue el cursor | Quanta Trail | Radiografía del cliente |
 | Fondo topográfico animado (curvas de nivel) | Quanta Trail | IMG_3052 |
@@ -110,6 +123,7 @@ assets/
 ## Pendientes
 
 - [ ] DRIFT: imagen o video, tecnología y atributos.
+- [ ] 6 fotos lifestyle finales (sección Lifestyle).
 - [ ] Archivo oficial del eslogan **PROVE YOURSELF** (SVG o PNG).
 - [ ] Fotos DSC **sin marca de agua** del fotógrafo (las recibidas son pruebas).
 - [ ] Confirmar textos de definición de cada tecnología.

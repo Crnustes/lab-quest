@@ -9,154 +9,305 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <filter id="motion-ghost" x="-30%" y="0" width="160%" height="100%"><feGaussianBlur stdDeviation="34 0"/></filter>
+    </svg>
     <!--
-      ESQUEMA DE LA PÁGINA (cada dato aparece una sola vez)
-      01 Hero ............ promesa + índice de los 5 productos
-      02 Colección ....... un capítulo por prenda: producto + su tecnología + atributos
-                           HELIX (Feel) · AXIOM (Motion) · DRIFT (pendiente) · NIMBUS (Protection + Feel)
+      ESQUEMA DE LA PÁGINA (cada dato aparece una sola vez · sin menú ni footer)
+      01 Hero ............ James (vidrio esmerilado) + logo oficial + eslogan
+      02 Colección ....... visor de una prenda a la vez + menú de íconos (7 prendas)
       03 Quanta Trail .... el calzado en su propio capítulo (X-Ray). Sin James (manual p.5)
-      04 Campaña ......... cierre de marca con James
-      Footer
+      04 James · Looks ... galería de James con prendas (nunca calzado)
+      05 Lifestyle ....... las prendas en uso real (fotos pendientes)
+      06 Vitrina ......... tienda: 8 piezas con COMPRAR (precios y URLs pendientes)
+      07 Banner final .... QUEST[LAB] + James + quest.com.co · cierre de la página
     -->
 
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-    <!-- ============ HEADER ============ -->
-    <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="QUEST LAB, inicio">
-        <img src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
-      </a>
-      <nav class="pill-nav" aria-label="Navegación principal">
-        <span class="pill-indicator" aria-hidden="true"></span>
-        <a href="#coleccion">Colección</a>
-        <a href="#xray">Quanta Trail</a>
-        <a href="#campana">Campaña</a>
-      </nav>
-      <a class="header-cta" href="#coleccion"><span class="lime-dot"></span>LANZAMIENTO <span aria-hidden="true">↘</span></a>
-      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
-    </header>
-
     <main>
 
-      <!-- ============ 01 · HERO ============ -->
-      <section class="hero" id="inicio" aria-labelledby="hero-title">
-        <div class="hero-frame">
-          <div class="hero-grid" aria-hidden="true"></div>
-          <div class="hero-light" aria-hidden="true"><span></span></div>
-
-          <div class="hero-content">
-            <p class="hero-badge"><span class="lime-dot"></span>QUEST[LAB] / LANZAMIENTO 2026</p>
-            <h1 id="hero-title" class="hero-title">
-              <span class="line"><span>DESIGNED</span></span>
-              <span class="line"><span>TO <em>ADAPT</em><i class="period">.</i></span></span>
-            </h1>
-            <p class="hero-description">
-              Diseño, tecnología y funcionalidad en prendas pensadas para acompañar
-              el movimiento de cada día.
-            </p>
-            <a class="btn btn-solid" href="#coleccion">VER COLECCIÓN <span aria-hidden="true">↓</span></a>
+      <!-- ============ 01 · HERO — James con efecto vidrio esmerilado + logo oficial ============
+           (antes era la sección final de Campaña; ahora abre la página)
+           La foto queda borrosa y una ventana nítida revela la mirada; sigue el cursor. -->
+      <section class="hero hero-campaign" id="inicio" aria-labelledby="hero-title">
+        <div class="campaign-frame" data-frost>
+          <img class="frost-base" src="assets/fotos/james-campana.jpg" alt="James Rodríguez, fotografía de campaña">
+          <img class="frost-sharp" src="assets/fotos/james-campana.jpg" alt="" aria-hidden="true">
+          <span class="frost-noise" aria-hidden="true"></span>
+          <div class="frost-window" aria-hidden="true">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <p class="frost-text top"><span class="hl">//</span> NOTHING TO PROVE.</p>
+            <p class="frost-text bottom">DESIGNED TO ADAPT.</p>
           </div>
 
-          <!-- Índice de productos: visibilidad inmediata del lanzamiento -->
-          <nav class="hero-index" aria-label="Productos del lanzamiento">
-            <a href="#helix">HELIX</a>
-            <a href="#axiom">AXIOM</a>
-            <a href="#drift">DRIFT</a>
-            <a href="#nimbus">NIMBUS</a>
-            <a href="#xray">QUANTA TRAIL</a>
-          </nav>
+          <h1 id="hero-title" class="visually-hidden">QUEST[LAB] · PROJECT James Rodríguez. Designed to adapt.</h1>
+
+          <!-- Logo oficial de la colaboración (manual p.2): QUEST[LAB]® • PROJECT James Rodríguez.
+               El bloque PROJECT está armado según el manual; reemplazar por el archivo oficial cuando llegue. -->
+          <div class="hero-lockup" role="img" aria-label="QUEST LAB, PROJECT James Rodríguez">
+            <img src="assets/brand/quest-lab-wordmark.png" alt="">
+            <span class="lockup-dot" aria-hidden="true"></span>
+            <span class="lockup-project" aria-hidden="true"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></span>
+          </div>
+
+          <p class="hero-code left"><span class="lime-dot"></span>LANZAMIENTO 2026</p>
+          <p class="hero-code right">Q95 / LAB26</p>
+
+          <!-- Eslogan oficial: usar el archivo gráfico, nunca texto en vivo (manual p.9) -->
+          <div class="slogan-slot">
+            <div class="slot slot-dark" data-label="PROVE YOURSELF / ARCHIVO OFICIAL"></div>
+          </div>
+
         </div>
       </section>
 
-      <!-- ============ 02 · COLECCIÓN — un capítulo por prenda ============
-           Regla: cada dato aparece UNA sola vez. La tecnología vive junto a su prenda. -->
+      <!-- ============ 02 · COLECCIÓN — una prenda a la vez + menú de íconos ============
+           Fuente de datos: ficha de producto (Superior / Inferior / Complementos).
+           Para editar una prenda, cambia su <article class="pv">. Para poner foto o video donde hay ícono,
+           reemplaza <div class="pv-illus">…</div> por <video> o <img>.
+           QUANTA TRAIL (calzado) no está aquí: tiene su propia sección (regla del manual). -->
       <section class="collection" id="coleccion" aria-labelledby="collection-title">
+        <!-- Íconos propios QUEST[LAB]: línea fina + nodos cuadrados (diagramas técnicos del manual)
+             + punteados de costura/medición. Cada ícono muestra la tecnología clave de su prenda. -->
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+          <!-- LIQUID FORM · camisa manga larga: botones ocultos + algodón líquido -->
+          <symbol id="i-liquid" viewBox="0 0 64 64">
+            <path d="M24 9 14 13 8 51l6 2 4-27v32h28V26l4 27 6-2-6-38-10-4"/>
+            <path d="m24 9 3-3h10l3 3-8 6z"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M32 15v43"/>
+            <path d="M21 46c2.2-1.6 3.8 1.6 6 0s3.8 1.6 6 0 3.8 1.6 6 0 3.8 1.6 5.5 0"/>
+            <path d="M21 50.5c2.2-1.6 3.8 1.6 6 0s3.8 1.6 6 0 3.8 1.6 6 0 3.8 1.6 5.5 0"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="6.8" y="49.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="54.8" y="49.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="16.8" y="56.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="44.8" y="56.8" width="2.4" height="2.4"/>
+          </symbol>
+
+          <!-- HELIX · camiseta slim, seamless: cuello sin costura + tacto frío -->
+          <symbol id="i-helix" viewBox="0 0 64 64">
+            <path d="M24.5 10 15 14.5l-5 11 7 3.5 3.5-6V57h23V23l3.5 6 7-3.5-5-11-9.5-4.5"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M24.5 10c1.8 3.6 4.3 5.4 7.5 5.4s5.7-1.8 7.5-5.4"/>
+            <path d="M28 30h8M26.5 34h11M28 38h8"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="23.3" y="8.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="38.3" y="8.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="19.3" y="55.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="42.3" y="55.8" width="2.4" height="2.4"/>
+          </symbol>
+
+          <!-- PULSE · polo seamless: ventilación en pecho y escápulas -->
+          <symbol id="i-pulse" viewBox="0 0 64 64">
+            <path d="M23 10 12 15 6 27l8 4 4-7v33h28V24l4 7 8-4-6-12-11-5"/>
+            <path d="m23 10 4-3 5 9 5-9 4 3"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M32 16v10"/>
+            <path d="M21.5 30v5M24.5 30v5M39.5 30v5M42.5 30v5"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="10.8" y="13.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="50.8" y="13.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="16.8" y="55.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="44.8" y="55.8" width="2.4" height="2.4"/>
+          </symbol>
+
+          <!-- AXIOM · camiseta regular: precisión (mira técnica) -->
+          <symbol id="i-axiom" viewBox="0 0 64 64">
+            <path d="M23 10 12 15 6 27l8 4 4-7v33h28V24l4 7 8-4-6-12-11-5c-2 4-5 6-9 6s-7-2-9-6Z"/>
+            <circle class="ring" fill="none" cx="32" cy="34" r="5.5"/>
+            <path d="M32 26v16M24 34h16"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="10.8" y="13.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="50.8" y="13.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="16.8" y="55.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="44.8" y="55.8" width="2.4" height="2.4"/>
+          </symbol>
+
+          <!-- DRIFT · camiseta loose: cuello 2x2 pesado (doble) -->
+          <symbol id="i-drift" viewBox="0 0 64 64">
+            <path d="M21 11 9 16 4 29l9 4 4-7v31h30V26l4 7 9-4-5-13-12-5"/>
+            <path d="M21 11c2 4 5.5 6 11 6s9-2 11-6"/>
+            <path d="M24 11c1.8 2.8 4.4 4 8 4s6.2-1.2 8-4"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M13 33v8M51 33v8"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="7.8" y="14.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="53.8" y="14.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="15.8" y="55.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="45.8" y="55.8" width="2.4" height="2.4"/>
+          </symbol>
+
+          <!-- VECTOR · pantalón stretch: pretina ergonómica + bolsillo oculto + vector -->
+          <symbol id="i-vector" viewBox="0 0 64 64">
+            <path d="M20 7h24l3 51H35.5L32 22l-3.5 36H17Z"/>
+            <path d="M20 10.5h24M20 13.5h24"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M37 18h5v6"/>
+            <path d="m22 50 5-22m-2.4 1.6L27 28l.9 2.8"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="15.8" y="56.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="27.3" y="56.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="34.3" y="56.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="45.8" y="56.8" width="2.4" height="2.4"/>
+          </symbol>
+
+          <!-- NIMBUS · chaqueta cortavientos: capucha desmontable + termosellado + impermeable -->
+          <symbol id="i-nimbus" viewBox="0 0 64 64">
+            <path d="M23 15c0-10 18-10 18 0l10 3 6 32-7 2-3-22v28H17V30l-3 22-7-2 6-32Z"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M23 15h18"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M17 24h30"/>
+            <path d="M32 15v43"/>
+            <path d="M51 5.5s-2.6 3-2.6 4.8a2.6 2.6 0 0 0 5.2 0c0-1.8-2.6-4.8-2.6-4.8Z"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="5.8" y="48.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="55.8" y="48.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="15.8" y="56.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="45.8" y="56.8" width="2.4" height="2.4"/>
+          </symbol>
+          <!-- QUANTA TRAIL · zapatilla trail (perfil): tacos de tracción + plantilla adaptativa (punteada) -->
+          <symbol id="i-quanta" viewBox="0 0 64 64">
+            <path d="M7 43 8 31c0-3.5 2-5.5 5-6.5l3-4 7 1 5 6.5 12 2.5 10 4c5.5 2 8.8 4.5 10 8.5"/>
+            <path d="M6 43h54c0 3-2 5.5-5 5.5H10.5C8 48.5 6 46.2 6 43Z"/>
+            <path d="M11 48.5v2.6M17 48.5v2.6M23 48.5v2.6M29 48.5v2.6M35 48.5v2.6M41 48.5v2.6M47 48.5v2.6M53 48.5v2.6"/>
+            <path d="m29.5 28.5 2.6-3.2M33.6 29.3l2.6-3.2M37.7 30.1l2.6-3.2"/>
+            <path d="M16 20.5 14.6 16.4 18 15.8l1 5"/>
+            <path d="M13.5 36.5c8-2.6 18-2.4 29 1"/>
+            <path class="dash" stroke-dasharray="1.6 2.2" d="M10 40h44"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="4.8" y="41.8" width="2.4" height="2.4"/><rect class="node" style="fill: var(--node-fill, #000)" x="58.8" y="41.8" width="2.4" height="2.4"/>
+            <rect class="node" style="fill: var(--node-fill, #000)" x="14.8" y="19.3" width="2.4" height="2.4"/>
+          </symbol>
+        </svg>
+
         <div class="wrap">
-          <div class="kicker reveal"><span>COLECCIÓN</span><span>FEEL · MOTION · PROTECTION</span></div>
+          <div class="kicker reveal"><span>COLECCIÓN</span><span>SUPERIOR · INFERIOR · COMPLEMENTOS</span></div>
           <div class="section-head">
             <h2 id="collection-title" class="title reveal">La tecnología que importa<br>se siente en el uso<span class="period">.</span></h2>
-            <p class="lead-sm reveal">Cada prenda nace de una tecnología. Una idea por prenda, sin ruido.</p>
+            <p class="lead-sm reveal">Siete prendas, una a la vez. Elige una en el menú de abajo.</p>
           </div>
-        </div>
 
-        <!-- Navegación fija de la colección -->
-        <nav class="collection-nav" aria-label="Prendas de la colección">
-          <a href="#helix" class="is-active">HELIX</a>
-          <a href="#axiom">AXIOM</a>
-          <a href="#drift">DRIFT</a>
-          <a href="#nimbus">NIMBUS</a>
-        </nav>
+          <!-- Visor: se muestra una prenda a la vez -->
+          <div class="pv-stage" aria-live="polite">
 
-        <div class="wrap chapters">
-          <!-- HELIX -->
-          <article class="chapter" id="helix">
-            <div class="chapter-media reveal">
-              <video data-autoplay muted loop playsinline preload="none" poster="assets/video/helix-clean.jpg" src="assets/video/helix-clean.mp4"></video>
-              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            </div>
-            <div class="chapter-info">
-              <p class="chapter-num reveal">CAMISETA</p>
-              <h3 class="chapter-name reveal">HELIX</h3>
-              <div class="chapter-tech reveal"><small>TECNOLOGÍA</small><b>FEEL</b><p>Equilibrio: cómo se siente la prenda sobre la piel.</p></div>
-              <ol class="attrs reveal">
-                <li>Ultra fresh touch</li>
-                <li>Suavidad + frescura</li>
-                <li>Caída natural</li>
-                <li>Construcción ligera</li>
-              </ol>
-            </div>
-          </article>
+            <article class="pv" id="liquid-form" data-pv="liquid-form">
+              <div class="pv-media"><img class="pv-photo" src="assets/fotos/liquid-form-provisional.jpg" alt="Camisa LIQUID FORM (foto provisional)">
+                <div class="pv-hud" aria-hidden="true">
+                  <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
+                  <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
+                  <ul class="hud-list"><li class="hud-list-title">TECNOLOGÍA</li><li style="--d:0.20s">ANTIFLUIDO</li><li style="--d:0.32s">ANTIARRUGAS</li><li style="--d:0.44s">BOTONES OCULTOS</li></ul>
+                  <span class="hud-corner tl"></span><span class="hud-corner br"></span>
+                </div>
+              </div>
+              <div class="pv-info">
+                <p class="pv-cat">SUPERIOR</p>
+                <h3 class="pv-name">LIQUID FORM</h3>
+                <p class="pv-concept"><span class="lime-dot"></span>VERSATILIDAD</p>
+                <p class="pv-desc">Camisa manga larga de algodón líquido</p>
+                <p class="pv-label">TECNOLOGÍA</p>
+                <ul class="pv-attrs"><li>Antifluido</li><li>Antiarrugas</li><li>Ultra stretch</li><li>Botones ocultos</li></ul>
+              </div>
+            </article>
 
-          <!-- AXIOM -->
-          <article class="chapter is-reverse" id="axiom">
-            <div class="chapter-media reveal">
-              <video data-autoplay muted loop playsinline preload="none" poster="assets/video/axiom-clean.jpg" src="assets/video/axiom-clean.mp4"></video>
-              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            </div>
-            <div class="chapter-info">
-              <p class="chapter-num reveal">CAMISETA</p>
-              <h3 class="chapter-name reveal">AXIOM</h3>
-              <div class="chapter-tech reveal"><small>TECNOLOGÍA</small><b>MOTION</b><p>Precisión: libertad para moverte sin restricciones.</p></div>
-              <ol class="attrs reveal">
-                <li>Elasticidad + recuperación</li>
-                <li><em class="hl">12%</em> elastano</li>
-                <li>Ultra motion</li>
-              </ol>
-            </div>
-          </article>
+            <article class="pv is-active" id="helix" data-pv="helix">
+              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/helix-clean.jpg" src="assets/video/helix-clean.mp4"></video>
+                <div class="pv-hud" aria-hidden="true">
+                  <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
+                  <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
+                  <ul class="hud-list"><li class="hud-list-title">TECNOLOGÍA</li><li style="--d:0.20s">ANTIOLOR</li><li style="--d:0.32s">CONTROL DE HUMEDAD</li><li style="--d:0.44s">TACTO FRÍO</li></ul>
+                  <span class="hud-corner tl"></span><span class="hud-corner br"></span>
+                </div>
+              </div>
+              <div class="pv-info">
+                <p class="pv-cat">SUPERIOR</p>
+                <h3 class="pv-name">HELIX</h3>
+                <p class="pv-concept"><span class="lime-dot"></span>EQUILIBRIO</p>
+                <p class="pv-desc">Fit slim, acabado seamless</p>
+                <p class="pv-label">TECNOLOGÍA</p>
+                <ul class="pv-attrs"><li>Antiolor</li><li>Control de humedad</li><li>Tacto frío</li></ul>
+              </div>
+            </article>
 
-          <!-- DRIFT: contenido pendiente -->
-          <article class="chapter" id="drift">
-            <div class="chapter-media slot reveal" data-label="IMAGEN / VIDEO DRIFT · PENDIENTE"></div>
-            <div class="chapter-info">
-              <p class="chapter-num reveal">CAMISETA</p>
-              <h3 class="chapter-name reveal">DRIFT</h3>
-              <div class="chapter-tech is-pending reveal"><small>TECNOLOGÍA</small><b>POR CONFIRMAR</b><p>Definición de la tecnología pendiente.</p></div>
-              <ol class="attrs is-pending reveal">
-                <li>Atributo por confirmar</li>
-                <li>Atributo por confirmar</li>
-                <li>Atributo por confirmar</li>
-              </ol>
-            </div>
-          </article>
+            <article class="pv" id="pulse" data-pv="pulse">
+              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/pulse-clean.jpg" src="assets/video/pulse-clean.mp4"></video>
+                <div class="pv-hud" aria-hidden="true">
+                  <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
+                  <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
+                  <ul class="hud-list"><li class="hud-list-title">TECNOLOGÍA</li><li style="--d:0.20s">SIN COSTURA VISIBLE</li><li style="--d:0.32s">VENTILACIÓN</li><li style="--d:0.44s">PROTECCIÓN SOLAR</li></ul>
+                  <span class="hud-corner tl"></span><span class="hud-corner br"></span>
+                </div>
+              </div>
+              <div class="pv-info">
+                <p class="pv-cat">SUPERIOR</p>
+                <h3 class="pv-name">PULSE</h3>
+                <p class="pv-concept"><span class="lime-dot"></span>LIDERAZGO</p>
+                <p class="pv-desc">Polo seamless</p>
+                <p class="pv-label">TECNOLOGÍA</p>
+                <ul class="pv-attrs"><li>Sin costura visible</li><li>Antiarrugas</li><li>Ultra stretch</li><li>Ventilación en escápulas y pecho</li><li>Secado rápido</li><li>Protección solar</li></ul>
+              </div>
+            </article>
 
-          <!-- NIMBUS -->
-          <article class="chapter is-reverse" id="nimbus">
-            <div class="chapter-media reveal">
-              <video data-autoplay muted loop playsinline preload="none" poster="assets/video/nimbus-clean.jpg" src="assets/video/nimbus-clean.mp4"></video>
-              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            </div>
-            <div class="chapter-info">
-              <p class="chapter-num reveal">CHAQUETA</p>
-              <h3 class="chapter-name reveal">NIMBUS</h3>
-              <div class="chapter-tech reveal"><small>TECNOLOGÍA</small><b>PROTECTION <i>+</i> FEEL</b><p>Protección integrada al diseño.</p></div>
-              <ol class="attrs reveal">
-                <li>Waterproof · <em class="hl">100%</em> impermeable</li>
-                <li>Soft shell</li>
-                <li>Diseñada para adaptarse</li>
-              </ol>
-            </div>
-          </article>
+            <article class="pv" id="axiom" data-pv="axiom">
+              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/axiom-clean.jpg" src="assets/video/axiom-clean.mp4"></video>
+                <div class="pv-hud" aria-hidden="true">
+                  <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
+                  <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
+                  <ul class="hud-list"><li class="hud-list-title">TECNOLOGÍA</li><li style="--d:0.20s">ANTIPILLING</li><li style="--d:0.32s">NO SE DEFORMA</li></ul>
+                  <span class="hud-corner tl"></span><span class="hud-corner br"></span>
+                </div>
+              </div>
+              <div class="pv-info">
+                <p class="pv-cat">SUPERIOR</p>
+                <h3 class="pv-name">AXIOM</h3>
+                <p class="pv-concept"><span class="lime-dot"></span>PRECISIÓN</p>
+                <p class="pv-desc">Fit regular, acabado seamless</p>
+                <p class="pv-label">TECNOLOGÍA</p>
+                <ul class="pv-attrs"><li>Antipilling</li><li>Resistente (no se deforma)</li></ul>
+              </div>
+            </article>
+
+            <article class="pv" id="drift" data-pv="drift">
+              <div class="pv-media"><div class="pv-illus"><svg><use href="#i-drift"/></svg><span>FOTO / VIDEO PENDIENTE</span></div>
+                <div class="pv-hud" aria-hidden="true">
+                  <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
+                  <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
+                  <ul class="hud-list"><li class="hud-list-title">TECNOLOGÍA</li><li style="--d:0.20s">CUELLO 2X2 PESADO</li><li style="--d:0.32s">100% ALGODÓN PEACH · 300 G</li></ul>
+                  <span class="hud-corner tl"></span><span class="hud-corner br"></span>
+                </div>
+              </div>
+              <div class="pv-info">
+                <p class="pv-cat">SUPERIOR</p>
+                <h3 class="pv-name">DRIFT</h3>
+                <p class="pv-concept"><span class="lime-dot"></span>CONFORT CONSCIENTE</p>
+                <p class="pv-desc">Fit loose, <em class="hl">100%</em> algodón peach 300 g</p>
+                <p class="pv-label">TECNOLOGÍA</p>
+                <ul class="pv-attrs"><li>Estructura cómoda</li><li>Cuello 2x2 pesado</li></ul>
+              </div>
+            </article>
+
+            <article class="pv" id="vector" data-pv="vector">
+              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/vector-clean.jpg" src="assets/video/vector-clean.mp4"></video>
+                <div class="pv-hud" aria-hidden="true">
+                  <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
+                  <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
+                  <ul class="hud-list"><li class="hud-list-title">TECNOLOGÍA</li><li style="--d:0.20s">PRETINA ERGONÓMICA</li><li style="--d:0.32s">BOLSILLO OCULTO</li><li style="--d:0.44s">ANTIFLUIDO</li></ul>
+                  <span class="hud-corner tl"></span><span class="hud-corner br"></span>
+                </div>
+              </div>
+              <div class="pv-info">
+                <p class="pv-cat">INFERIOR</p>
+                <h3 class="pv-name">VECTOR</h3>
+                <p class="pv-concept"><span class="lime-dot"></span>DISCIPLINA</p>
+                <p class="pv-desc">Pantalón stretch</p>
+                <p class="pv-label">TECNOLOGÍA</p>
+                <ul class="pv-attrs"><li>Antifluido</li><li>Pretina ergonómica</li><li>Termorregulación</li><li>Bolsillo oculto</li></ul>
+              </div>
+            </article>
+
+            <article class="pv" id="nimbus" data-pv="nimbus">
+              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/nimbus-clean.jpg" src="assets/video/nimbus-clean.mp4"></video>
+                <div class="pv-hud" aria-hidden="true">
+                  <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
+                  <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
+                  <ul class="hud-list"><li class="hud-list-title">TECNOLOGÍA</li><li style="--d:0.20s">CAPUCHA DESMONTABLE</li><li style="--d:0.32s">COSTURAS TERMOSELLADAS</li><li style="--d:0.44s">IMPERMEABLE</li></ul>
+                  <span class="hud-corner tl"></span><span class="hud-corner br"></span>
+                </div>
+              </div>
+              <div class="pv-info">
+                <p class="pv-cat">COMPLEMENTOS</p>
+                <h3 class="pv-name">NIMBUS</h3>
+                <p class="pv-concept"><span class="lime-dot"></span>VISIÓN</p>
+                <p class="pv-desc">Chaqueta smart cortavientos</p>
+                <p class="pv-label">TECNOLOGÍA</p>
+                <ul class="pv-attrs"><li>Costuras termoselladas</li><li>Regulación térmica</li><li>Capucha desmontable</li><li>Impermeable</li></ul>
+              </div>
+            </article>
+          </div>
+
+          <!-- Menú de prendas con íconos -->
+          <nav class="pv-menu" aria-label="Elegir prenda" role="tablist">
+            <button role="tab" aria-selected="false" data-go="liquid-form"><svg><use href="#i-liquid"/></svg><b>LIQUID FORM</b><small>Superior</small></button>
+            <button role="tab" aria-selected="true" data-go="helix" class="is-active"><svg><use href="#i-helix"/></svg><b>HELIX</b><small>Superior</small></button>
+            <button role="tab" aria-selected="false" data-go="pulse"><svg><use href="#i-pulse"/></svg><b>PULSE</b><small>Superior</small></button>
+            <button role="tab" aria-selected="false" data-go="axiom"><svg><use href="#i-axiom"/></svg><b>AXIOM</b><small>Superior</small></button>
+            <button role="tab" aria-selected="false" data-go="drift"><svg><use href="#i-drift"/></svg><b>DRIFT</b><small>Superior</small></button>
+            <button role="tab" aria-selected="false" data-go="vector"><svg><use href="#i-vector"/></svg><b>VECTOR</b><small>Inferior</small></button>
+            <button role="tab" aria-selected="false" data-go="nimbus"><svg><use href="#i-nimbus"/></svg><b>NIMBUS</b><small>Complementos</small></button>
+          </nav>
         </div>
       </section>
 
@@ -169,6 +320,8 @@
 
           <div class="xray-grid">
             <div class="xray-copy">
+              <!-- Ícono propio del producto (mismo sistema de íconos de la Colección) -->
+              <div class="xray-icon reveal"><svg><use href="#i-quanta"/></svg><span><b>QUANTA TRAIL</b><small>Calzado · Zapatillas trail</small></span></div>
               <p class="xray-eyebrow reveal"><span class="lime-dot"></span>{RENDIMIENTO}</p>
               <h2 id="xray-title" class="title reveal">Lo que no<br>se ve<span class="period">.</span></h2>
               <p class="lead-sm reveal">Hay una tecnología que se ve, y hay una que no. La que no se ve es la que realmente importa.</p>
@@ -179,6 +332,8 @@
                 <li>Frescura prolongada</li>
                 <li>Control de temperatura</li>
               </ol>
+              <!-- Call to action de compra. URL de la tienda PENDIENTE: reemplazar href="#" por el enlace real -->
+              <a class="btn btn-solid xray-buy reveal" href="#" data-buy="quanta-trail">COMPRAR QUANTA TRAIL <span aria-hidden="true">↗</span></a>
             </div>
 
             <!-- Escáner: la capa "scan" está alineada con la foto y se revela en la franja -->
@@ -198,41 +353,197 @@
         </div>
       </section>
 
-      <!-- ============ 04 · CAMPAÑA ============ -->
-      <section class="campaign" id="campana" aria-labelledby="campaign-title">
-        <!-- Efecto vidrio esmerilado: la foto queda borrosa y una ventana nítida revela la mirada -->
-        <div class="campaign-frame" data-frost>
-          <img class="frost-base" src="assets/fotos/james-campana.jpg" alt="James Rodríguez, fotografía de campaña" loading="lazy">
-          <img class="frost-sharp" src="assets/fotos/james-campana.jpg" alt="" aria-hidden="true" loading="lazy">
-          <span class="frost-noise" aria-hidden="true"></span>
-          <div class="frost-window" aria-hidden="true">
-            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <p class="frost-text top"><span class="hl">//</span> NOTHING TO PROVE.</p>
-            <p class="frost-text bottom">DESIGNED TO ADAPT.</p>
-          </div>
-          <img class="campaign-logo" src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
+      <!-- ============ 04 · JAMES · LOOKS — galería ============
+           Solo prendas, nunca calzado (manual p.5): las fotos están encuadradas sin zapatos.
+           Va justo después de Quanta Trail: secciones separadas; aquí nunca aparece calzado. -->
+      <section class="looks" id="looks" aria-labelledby="looks-title">
+        <div class="wrap">
+          <div class="kicker reveal"><span>JAMES · LOOKS</span><span>NOTHING WITHOUT PURPOSE.</span></div>
 
-          <!-- Eslogan oficial: usar el archivo gráfico, nunca texto en vivo (manual p.9) -->
-          <div class="slogan-slot">
-            <h2 id="campaign-title" class="visually-hidden">Prove yourself. Nothing to prove.</h2>
-            <div class="slot slot-dark" data-label="PROVE YOURSELF / ARCHIVO OFICIAL"></div>
+          <div class="looks-head">
+            <h2 id="looks-title" class="title reveal">James, con cada<br>prenda<span class="period">.</span></h2>
+            <div class="project-id-inline reveal"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></div>
           </div>
 
-          <!-- Identificador: solo con fotografía de James (manual p.5) -->
-          <div class="project-id"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></div>
+          <!-- NOMBRES DE PRENDA PROVISIONALES (data-provisional): asignados por tipo de prenda; confirmar con el cliente. -->
+          <div class="looks-grid">
+            <!-- Foto principal: se revela por franjas al hacer scroll + estela de movimiento -->
+            <figure class="look look-main" data-look-stripes>
+              <img class="look-img" src="assets/fotos/james-retrato.jpg" alt="James Rodríguez con chaqueta, primer plano" loading="lazy">
+              <img class="look-ghost" src="assets/fotos/james-retrato.jpg" alt="" aria-hidden="true" loading="lazy">
+              <span class="look-grain" aria-hidden="true"></span>
+              <figcaption data-provisional><span>LOOK 01</span><span>NIMBUS</span></figcaption>
+            </figure>
+
+            <!-- Fotos secundarias: entran borrosas y se enfocan; al pasar el cursor, estela de movimiento -->
+            <figure class="look reveal">
+              <img class="look-img" src="assets/fotos/james-look-01.jpg" alt="James Rodríguez con camiseta blanca" loading="lazy">
+              <img class="look-ghost" src="assets/fotos/james-look-01.jpg" alt="" aria-hidden="true" loading="lazy">
+              <figcaption data-provisional><span>LOOK 02</span><span>AXIOM</span></figcaption>
+            </figure>
+            <figure class="look reveal">
+              <img class="look-img" src="assets/fotos/james-look-02.jpg" alt="James Rodríguez con chaqueta gris" loading="lazy">
+              <img class="look-ghost" src="assets/fotos/james-look-02.jpg" alt="" aria-hidden="true" loading="lazy">
+              <figcaption data-provisional><span>LOOK 03</span><span>NIMBUS</span></figcaption>
+            </figure>
+            <figure class="look reveal">
+              <img class="look-img" src="assets/fotos/james-look-04.jpg" alt="James Rodríguez con polo negra" loading="lazy">
+              <img class="look-ghost" src="assets/fotos/james-look-04.jpg" alt="" aria-hidden="true" loading="lazy">
+              <figcaption data-provisional><span>LOOK 04</span><span>PULSE</span></figcaption>
+            </figure>
+            <figure class="look reveal">
+              <img class="look-img" src="assets/fotos/james-look-03.jpg" alt="James Rodríguez con chaqueta con capucha" loading="lazy">
+              <img class="look-ghost" src="assets/fotos/james-look-03.jpg" alt="" aria-hidden="true" loading="lazy">
+              <figcaption data-provisional><span>LOOK 05</span><span>NIMBUS</span></figcaption>
+            </figure>
+          </div>
         </div>
       </section>
-    </main>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="site-footer">
-      <img class="footer-logo" src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
-      <div class="footer-bottom">
-        <span>QUEST[LAB] / 2026</span>
-        <span>ORIGIN: CALI / CO · <span class="hl">03°25'49"N / 076°31'11"W</span></span>
-        <a href="#inicio">VOLVER ARRIBA ↑</a>
-      </div>
-    </footer>
+      <!-- ============ 05 · LIFESTYLE — las prendas en uso real ============
+           FOTOS PROVISIONALES: son pruebas del fotógrafo con marca de agua; reemplazar por los archivos finales.
+           Para cambiar una foto, reemplaza el <img> (o un <div class="ls-slot">)
+           por <img src="assets/lifestyle/archivo.jpg" alt="...">, conservando las clases ls-item / ls-*.
+           Si la foto es de James, que no aparezca calzado en el encuadre (manual p.5). -->
+      <section class="lifestyle" id="lifestyle" aria-labelledby="lifestyle-title">
+        <div class="wrap">
+          <div class="kicker reveal"><span>APPLICATION: DAILY MOVEMENT</span><span>FIELD: URBAN MOVEMENT</span></div>
+
+          <!-- NOMBRES DE PRENDA PROVISIONALES (data-provisional): confirmar con el cliente qué prenda es cada foto. -->
+          <div class="ls-grid ls-grid-5">
+            <figure class="ls-item ls-m1 reveal">
+              <img src="assets/fotos/lifestyle-m1.jpg" alt="Camisa blanca caminando, vista desde arriba" loading="lazy">
+              <figcaption><span>LIQUID FORM</span><span>EN MOVIMIENTO</span></figcaption>
+            </figure>
+
+            <div class="ls-text reveal">
+              <h2 id="lifestyle-title" class="title">Movimiento que<br>no se detiene<span class="period">.</span></h2>
+              <p class="lead-sm">Contextos que cambian, jornadas que se extienden. Las prendas, en el día real.</p>
+            </div>
+
+            <figure class="ls-item ls-m2 reveal">
+              <img src="assets/fotos/lifestyle-m2.jpg" alt="Polo subiendo la escalera del metro" loading="lazy">
+              <figcaption><span>PULSE</span><span>TRAYECTO</span></figcaption>
+            </figure>
+
+            <figure class="ls-item ls-m3 reveal">
+              <img src="assets/fotos/lifestyle-m3.jpg" alt="Camiseta gris con movimiento al frente" loading="lazy">
+              <figcaption data-provisional><span>HELIX</span><span>RUTINA</span></figcaption>
+            </figure>
+
+            <figure class="ls-item ls-m4 reveal">
+              <img src="assets/fotos/lifestyle-m4.jpg" alt="Camisa blanca entre personas en movimiento" loading="lazy" style="object-position: 50% 45%">
+              <figcaption><span>LIQUID FORM</span><span>CIUDAD</span></figcaption>
+            </figure>
+
+            <figure class="ls-item ls-m5 reveal">
+              <img src="assets/fotos/lifestyle-m5.jpg" alt="Polo frente al tren en movimiento" loading="lazy" style="object-position: 50% 35%">
+              <figcaption><span>PULSE</span><span>TRANSPORTE</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 06 · VITRINA — tienda del lanzamiento ============
+           Precios y URLs de compra PENDIENTES: reemplazar "Precio por confirmar" y href="#".
+           Para poner foto de producto donde hay ícono, reemplaza <div class="vt-illus">…</div> por <img>.
+           Aquí no aparece James (permite incluir el calzado). -->
+      <section class="vitrina" id="vitrina" aria-labelledby="vitrina-title">
+        <div class="wrap">
+          <div class="kicker reveal"><span>VITRINA</span><span>LANZAMIENTO 2026</span></div>
+          <div class="section-head">
+            <h2 id="vitrina-title" class="title reveal">La colección<span class="period">.</span></h2>
+            <p class="lead-sm reveal">Ocho piezas: superior, inferior, complementos y calzado.</p>
+          </div>
+
+          <div class="vt-grid">
+            <article class="vt-card reveal">
+              <div class="vt-media"><img src="assets/fotos/liquid-form-provisional.jpg" alt="Camisa LIQUID FORM (foto provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>LIQUID FORM</h3><p class="vt-sub">Camisa manga larga · algodón líquido</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="liquid-form">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal">
+              <div class="vt-media"><img src="assets/video/helix-clean.jpg" alt="Camiseta HELIX" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>HELIX</h3><p class="vt-sub">Camiseta · fit slim, seamless</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="helix">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal">
+              <div class="vt-media"><img src="assets/video/pulse-clean.jpg" alt="Polo PULSE" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>PULSE</h3><p class="vt-sub">Polo seamless</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="pulse">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal">
+              <div class="vt-media"><img src="assets/video/axiom-clean.jpg" alt="Camiseta AXIOM" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>AXIOM</h3><p class="vt-sub">Camiseta · fit regular, seamless</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="axiom">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal">
+              <div class="vt-media"><div class="vt-illus"><svg><use href="#i-drift"/></svg></div><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>DRIFT</h3><p class="vt-sub">Camiseta · fit loose, algodón peach 300 g</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="drift">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal">
+              <div class="vt-media"><img src="assets/video/vector-clean.jpg" alt="Pantalón VECTOR" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>VECTOR</h3><p class="vt-sub">Pantalón stretch</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="vector">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal">
+              <div class="vt-media"><img src="assets/video/nimbus-clean.jpg" alt="Chaqueta NIMBUS" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>NIMBUS</h3><p class="vt-sub">Chaqueta smart cortavientos</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="nimbus">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal">
+              <div class="vt-media"><img src="assets/producto/quanta-05.jpg" alt="Zapatillas QUANTA TRAIL" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <h3>QUANTA TRAIL</h3><p class="vt-sub">Zapatillas trail</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="quanta-trail">COMPRAR</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 07 · BANNER FINAL — cierre de marca (referente: banner de campaña) ============
+           Lleva a James: aquí no se muestra ni se menciona calzado (manual p.5). -->
+      <section class="banner" id="banner" aria-labelledby="banner-title">
+        <div class="banner-frame">
+          <h2 id="banner-title" class="visually-hidden">QUEST[LAB] · PROJECT James Rodríguez</h2>
+
+          <!-- Foto de James con estela de movimiento y luz azul (QL Blue) -->
+          <div class="banner-photo" aria-hidden="true">
+            <img class="banner-img" src="assets/fotos/james-banner.jpg" alt="">
+            <img class="banner-ghost" src="assets/fotos/james-banner.jpg" alt="">
+            <span class="banner-light"></span>
+          </div>
+
+          <img class="banner-logo" src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
+
+          <div class="banner-project"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></div>
+
+          <!-- Códigos técnicos (textos de apoyo del manual) -->
+          <p class="banner-code tl">03°25'49"N / 076°31'11"W <span class="dim">+ PROTOCOL: OBSERVE / TEST / REFINE</span><br>
+            <span class="indent">Q95 / LAB26<br>APPLICATION: DAILY MOVEMENT<br>DESIGNED TO ADAPT.</span></p>
+          <p class="banner-code tr">NOTHING WITHOUT PURPOSE.<br><span class="dim">SYS.1995 / MODULE: LAB_2026</span></p>
+          <p class="banner-code bc dim">QUEST [LAB]<br>NOTHING TO PROVE.<br>PROVE YOURSELF.<br><span class="indent">APPLICATION: DAILY MOVEMENT</span></p>
+
+          <!-- Mira y escala técnica (recursos gráficos del manual) -->
+          <div class="banner-scale" aria-hidden="true"><span>00</span><i></i><span>95</span></div>
+          <svg class="banner-target" viewBox="0 0 100 100" aria-hidden="true"><path d="M8 4H4v92h4M92 4h4v92h-4"/><circle cx="50" cy="50" r="30"/><path d="M50 14v72M14 50h72"/></svg>
+
+          <a class="banner-web" href="https://quest.com.co" target="_blank" rel="noopener">
+            <svg viewBox="0 0 40 24" aria-hidden="true"><ellipse cx="20" cy="12" rx="18" ry="9"/><ellipse cx="20" cy="12" rx="8" ry="9"/><path d="M2 12h36M5 7.5h30M5 16.5h30"/></svg>
+            quest.com.co
+          </a>
+        </div>
+      </section>
+
+    </main>
 
     <script src="script.js" defer></script>
   </body>
