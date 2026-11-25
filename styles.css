@@ -612,9 +612,6 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .banner-scale i { width: 52px; height: 7px; background: repeating-linear-gradient(90deg, rgba(240,238,233,.35) 0 1px, transparent 1px 5.6px); }
 .banner-target { position: absolute; z-index: 1; right: 3%; top: 26%; width: 7%; fill: none; stroke: rgba(240,238,233,.14); stroke-width: 0.8; }
 
-.banner-web { position: absolute; z-index: 2; left: 4%; bottom: 8%; display: inline-flex; align-items: center; gap: 0.8rem; font-size: clamp(13px, 1.4vw, 21px); font-weight: 500; color: var(--white); transition: opacity 0.3s; }
-.banner-web:hover { opacity: 0.7; }
-.banner-web svg { width: clamp(28px, 2.6vw, 40px); fill: none; stroke: currentColor; stroke-width: 1.4; }
 
 @media (max-width: 760px) {
   .banner-frame { aspect-ratio: auto; min-height: 560px; }
@@ -623,8 +620,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   .banner-project { right: auto; left: 6%; top: auto; bottom: 18%; transform: none; }
   .banner-code.tl, .banner-code.bc, .banner-scale, .banner-target { display: none; }
   .banner-code.tr { top: auto; bottom: 5%; right: 6%; }
-  .banner-web { left: 6%; bottom: 5%; }
-}
+  }
 @media (prefers-reduced-motion: reduce) { .banner-light { animation: none; } }
 
 /* =========================================================
@@ -760,6 +756,35 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .xray-list li em small { font-size: 9px; letter-spacing: 0.14em; color: var(--gargoyle); }
 .xray-list li em b { font-size: 12px; letter-spacing: 0.08em; font-weight: 600; }
 .xray-list li.is-on em small { color: var(--blue-soft); }
+
+/* =========================================================
+   COLECCIÓN · recorrido automático: barra lima que se llena + porcentaje
+   ========================================================= */
+.pv-menu button.is-active::after { display: none; }
+.pv-prog { position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: rgba(228,245,73,.14); opacity: 0; transition: opacity 0.3s; }
+.pv-prog::after { content: ""; position: absolute; inset: 0; background: var(--lime); transform-origin: left; transform: scaleX(var(--p, 0)); box-shadow: 0 0 10px rgba(228,245,73,.45); }
+.pv-pct { position: absolute; right: 8px; top: 7px; font-style: normal; font-size: 8px; font-weight: 500; letter-spacing: 0.12em; color: var(--lime); opacity: 0; transition: opacity 0.3s; }
+.pv-menu button.is-active .pv-prog, .pv-menu button.is-active .pv-pct { opacity: 1; }
+@media (max-width: 760px) { .pv-pct { right: 4px; top: 4px; font-size: 7px; } }
+
+/* =========================================================
+   TECNOLOGÍA — manifiesto de marca
+   ========================================================= */
+.tech { padding: clamp(5rem, 9vw, 8rem) 0 clamp(2rem, 4vw, 3rem); background: var(--black); color: var(--white); }
+.tech-head { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: end; padding-top: clamp(2.5rem, 5vw, 4rem); }
+.tech-statement { margin: 0; font-size: clamp(1.6rem, 3.2vw, 3rem); font-weight: 500; letter-spacing: -0.05em; line-height: 1.1; text-transform: uppercase; }
+.tech-foot { margin-top: clamp(3rem, 6vw, 5rem); padding-top: 1rem; border-top: 1px solid var(--line-dark); display: flex; justify-content: space-between; gap: 1rem; font-size: 9px; letter-spacing: 0.14em; color: var(--gargoyle); }
+@media (max-width: 760px) {
+  .tech-head { grid-template-columns: 1fr; gap: 1.2rem; }
+  .tech-foot { flex-direction: column; gap: 0.3rem; }
+}
+
+/* Grano de película sobre toda la página (textura del referente y de las piezas) */
+.grain { position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(4) infinite; }
+@keyframes grain { 0% { transform: translate(0, 0); } 25% { transform: translate(-3%, 2%); } 50% { transform: translate(2%, -3%); } 75% { transform: translate(-2%, -1%); } 100% { transform: translate(0, 0); } }
+@media (prefers-reduced-motion: reduce) { .grain { animation: none; } }
 
 /* =========================================================
    FONDO TOPOGRÁFICO (referente IMG_3052)

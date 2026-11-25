@@ -62,6 +62,44 @@
       });
     });
     new IntersectionObserver(([e]) => { inView = e.isIntersecting; playActive(); }, { threshold: 0.25 }).observe($(".pv-stage", section));
+
+    /* Recorrido automático: la línea lima de la prenda activa se llena con su porcentaje
+       (como la lectura del escáner) y al llegar a 100% pasa a la siguiente prenda.
+       Se detiene mientras el cursor está sobre la prenda o el menú. */
+    const DURATION = 7000;
+    let progress = 0, paused = false, last = 0;
+    tabs.forEach((t) => t.insertAdjacentHTML("beforeend", '<i class="pv-prog" aria-hidden="true"></i><em class="pv-pct" aria-hidden="true">000%</em>'));
+    const paint = () => {
+      const t = tabs.find((b) => b.classList.contains("is-active"));
+      if (!t) return;
+      t.style.setProperty("--p", progress.toFixed(4));
+      $(".pv-pct", t).textContent = String(Math.round(progress * 100)).padStart(3, "0") + "%";
+    };
+    const reset = () => { tabs.forEach((b) => b.style.setProperty("--p", 0)); progress = 0; paint(); };
+    tabs.forEach((t) => t.addEventListener("click", reset));
+    [$(".pv-stage", section), $(".pv-menu", section)].forEach((el) => {
+      el.addEventListener("pointerenter", () => (paused = true));
+      el.addEventListener("pointerleave", () => (paused = false));
+    });
+    if (reduceMotion) { progress = 1; paint(); return; }
+    (function loop(now) {
+      requestAnimationFrame(loop);
+      const dt = last ? Math.min(now - last, 100) : 0;
+      last = now;
+      if (!inView || paused || document.hidden) return;
+      progress += dt / DURATION;
+      if (progress >= 1) {
+        const i = tabs.findIndex((b) => b.classList.contains("is-active"));
+        const next = tabs[(i + 1) % tabs.length];
+        show(next.dataset.go);
+        reset();
+        // En celular el menú se desliza: centrar la prenda nueva sin mover la página
+        const menu = next.parentElement;
+        if (menu.scrollWidth > menu.clientWidth) menu.scrollTo({ left: next.offsetLeft - (menu.clientWidth - next.offsetWidth) / 2, behavior: "smooth" });
+        return;
+      }
+      paint();
+    })(0);
   }
 
   /* ---------- Videos: se reproducen solo cuando están en pantalla ---------- */
@@ -251,6 +289,7 @@
     addEventListener("resize", update);
     update();
   }
+
 
   progress();
   lifestyleParallax();
