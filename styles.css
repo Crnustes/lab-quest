@@ -787,6 +787,19 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 @media (prefers-reduced-motion: reduce) { .grain { animation: none; } }
 
 /* =========================================================
+   QUANTA TRAIL · galería X-Ray en la tarjeta fija (misma distribución)
+   ========================================================= */
+.xray-official .xg-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s var(--ease); }
+.xray-official .xg-slide.is-active { opacity: 1; }
+.xray-official figcaption { z-index: 2; }
+.scan-nav { position: absolute; z-index: 3; left: 50%; top: 14px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 0.2rem;
+  padding: 0.2rem; border-radius: 999px; background: rgba(0,0,0,.35); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.14); font-size: 9px; letter-spacing: 0.12em; color: var(--cloud-dancer); white-space: nowrap; }
+.scan-nav span { padding: 0 0.5rem; }
+.scan-nav button { width: 26px; height: 26px; border-radius: 50%; color: var(--white); font-size: 12px; cursor: pointer; transition: background 0.3s, color 0.3s; }
+.scan-nav button:hover { background: var(--lime); color: var(--black); }
+
+/* =========================================================
    FONDO TOPOGRÁFICO (referente IMG_3052)
    ========================================================= */
 .topo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;

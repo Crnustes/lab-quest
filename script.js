@@ -291,12 +291,38 @@
   }
 
 
+  /* ---------- Quanta Trail: galería X-Ray (carrusel con fundido) ---------- */
+  function xrayGallery() {
+    const el = $("[data-xgallery]");
+    if (!el) return;
+    const slides = $$(".xg-slide", el);
+    const count = $("[data-xg-count]", el);
+    let current = 0, timer = null, visible = false, hover = false;
+    const go = (n) => {
+      current = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle("is-active", i === current));
+      count.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+    };
+    const restart = () => {
+      clearInterval(timer);
+      if (reduceMotion) return;
+      timer = setInterval(() => { if (visible && !hover && !document.hidden) go(current + 1); }, 4500);
+    };
+    $("[data-xg-prev]", el).addEventListener("click", () => { go(current - 1); restart(); });
+    $("[data-xg-next]", el).addEventListener("click", () => { go(current + 1); restart(); });
+    el.addEventListener("pointerenter", () => (hover = true));
+    el.addEventListener("pointerleave", () => (hover = false));
+    new IntersectionObserver(([e]) => (visible = e.isIntersecting), { threshold: 0.3 }).observe(el);
+    restart();
+  }
+
   progress();
   lifestyleParallax();
   looks();
   reveals();
   $$(".topo").forEach(topo);
   scanner();
+  xrayGallery();
   frost();
   productViewer();
   videos();
