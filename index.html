@@ -389,8 +389,8 @@
               <div class="pv-cell is-main">
                 <!-- Escáner: la capa "scan" está alineada con la foto y se revela en la franja -->
                 <div class="scanner" data-scanner>
-                  <img class="scan-base" src="assets/producto/quanta-03.jpg" alt="Quanta Trail, par de tenis" loading="lazy">
-                  <img class="scan-layer" src="assets/producto/quanta-03-scan.jpg" alt="" aria-hidden="true" loading="lazy">
+                  <img class="scan-base" src="assets/producto/quanta-scan-base.jpg" alt="Quanta Trail, par de tenis" loading="lazy">
+                  <img class="scan-layer" src="assets/producto/quanta-scan-layer.jpg" alt="" aria-hidden="true" loading="lazy">
                   <span class="scan-line" aria-hidden="true"><b data-scan-readout>SCAN 000%</b></span>
                   <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
                   <span class="scanner-tag">MUEVE EL CURSOR PARA ESCANEAR</span>
@@ -500,7 +500,8 @@
            (cuando termina de dibujarse pasa a la siguiente prenda),
            beneficio principal y botón a la prenda en la Colección. Cambia sola; la barra lima marca el tiempo.
            Sin calzado: esta sección sigue a James (manual p.5). -->
-      <section class="press" id="indice" aria-label="Índice de prendas">
+      <!-- OCULTA POR AHORA: quitar el atributo hidden para volver a mostrarla -->
+      <section class="press" id="indice" aria-label="Índice de prendas" hidden>
         <div class="wrap">
           <div class="kicker reveal"><span>QUEST[LAB] / ÍNDICE</span><span>SIETE PRENDAS · UNA PROPUESTA</span></div>
           <div class="px-stage" data-press>
@@ -608,32 +609,44 @@
           <div class="ls-grid ls-grid-5">
             <figure class="ls-item ls-m1 reveal">
               <img src="assets/fotos/lifestyle-m1.jpg" alt="Camisa blanca caminando, vista desde arriba" loading="lazy">
-              <figcaption><span>LIQUID FORM</span><span>EN MOVIMIENTO</span></figcaption>
+              <span class="ls-idx" aria-hidden="true">01</span>
+              <figcaption><span>CAMISA // LIQUID FORM</span><span>EN MOVIMIENTO</span></figcaption>
             </figure>
 
             <div class="ls-text reveal">
               <h2 id="lifestyle-title" class="title">Movimiento que<br>no se detiene<span class="period">.</span></h2>
               <p class="lead-sm">Contextos que cambian, jornadas que se extienden. Las prendas, en el día real.</p>
+              <!-- Bloques gráficos tipo laboratorio -->
+              <div class="ls-lab" aria-hidden="true">
+                <span class="b-black">QL<br>05</span>
+                <span class="b-blue">FIELD<br>TEST</span>
+                <span class="b-line">CAMISA<br>CAMISETA<br>POLO</span>
+                <span class="b-lime"></span>
+              </div>
             </div>
 
             <figure class="ls-item ls-m2 reveal">
               <img src="assets/fotos/lifestyle-m2.jpg" alt="Polo subiendo la escalera del metro" loading="lazy">
-              <figcaption><span>PULSE</span><span>TRAYECTO</span></figcaption>
+              <span class="ls-idx" aria-hidden="true">02</span>
+              <figcaption><span>POLO // PULSE</span><span>TRAYECTO</span></figcaption>
             </figure>
 
             <figure class="ls-item ls-m3 reveal">
               <img src="assets/fotos/lifestyle-m3.jpg" alt="Camiseta gris con movimiento al frente" loading="lazy">
-              <figcaption data-provisional><span>HELIX</span><span>RUTINA</span></figcaption>
+              <span class="ls-idx" aria-hidden="true">03</span>
+              <figcaption data-provisional><span>CAMISETA // HELIX</span><span>RUTINA</span></figcaption>
             </figure>
 
             <figure class="ls-item ls-m4 reveal">
               <img src="assets/fotos/lifestyle-m4.jpg" alt="Camisa blanca entre personas en movimiento" loading="lazy" style="object-position: 50% 45%">
-              <figcaption><span>LIQUID FORM</span><span>CIUDAD</span></figcaption>
+              <span class="ls-idx" aria-hidden="true">04</span>
+              <figcaption><span>CAMISA // LIQUID FORM</span><span>CIUDAD</span></figcaption>
             </figure>
 
             <figure class="ls-item ls-m5 reveal">
               <img src="assets/fotos/lifestyle-m5.jpg" alt="Polo frente al tren en movimiento" loading="lazy" style="object-position: 50% 35%">
-              <figcaption><span>PULSE</span><span>TRANSPORTE</span></figcaption>
+              <span class="ls-idx" aria-hidden="true">05</span>
+              <figcaption><span>POLO // PULSE</span><span>TRANSPORTE</span></figcaption>
             </figure>
           </div>
         </div>
@@ -653,52 +666,63 @@
             <p class="lead-sm reveal">Ocho piezas: camisa, camisetas, polo, pantalón, chaqueta y calzado.</p>
           </div>
 
-          <div class="vt-grid">
-            <article class="vt-card reveal">
+          <!-- Vitrina por categoría: filtra las prendas -->
+          <div class="vt-tabs reveal" role="group" aria-label="Filtrar por categoría">
+            <button type="button" class="is-active" aria-pressed="true" data-cat="all">TODO</button>
+            <button type="button" aria-pressed="false" data-cat="camisa">CAMISA</button>
+            <button type="button" aria-pressed="false" data-cat="camisetas">CAMISETAS</button>
+            <button type="button" aria-pressed="false" data-cat="polo">POLO</button>
+            <button type="button" aria-pressed="false" data-cat="pantalon">PANTALÓN</button>
+            <button type="button" aria-pressed="false" data-cat="chaqueta">CHAQUETA</button>
+            <button type="button" aria-pressed="false" data-cat="calzado">CALZADO</button>
+          </div>
+
+          <div class="vt-grid" id="vt-grid">
+            <article class="vt-card reveal" data-cat="camisa">
               <div class="vt-media"><div class="vt-illus"><svg><use href="#i-liquid"/></svg></div><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>LIQUID FORM</h3><p class="vt-sub">Camisa · slim, manga larga</p>
+              <p class="vt-cat">CAMISA</p><h3>LIQUID FORM</h3><p class="vt-sub">Camisa · slim, manga larga</p>
               <p class="vt-price">Precio por confirmar</p>
               <a class="vt-buy" href="#" data-buy="liquid-form">COMPRAR</a>
             </article>
-            <article class="vt-card reveal">
+            <article class="vt-card reveal" data-cat="camisetas">
               <div class="vt-media"><img src="assets/vitrina/vt-helix.jpg" alt="Camiseta HELIX negra (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>HELIX</h3><p class="vt-sub">Camiseta · slim, algodón y viscosa</p>
+              <p class="vt-cat">CAMISETA</p><h3>HELIX</h3><p class="vt-sub">Camiseta · slim, algodón y viscosa</p>
               <p class="vt-price">Precio por confirmar</p>
               <a class="vt-buy" href="#" data-buy="helix">COMPRAR</a>
             </article>
-            <article class="vt-card reveal">
-              <div class="vt-media"><img src="assets/vitrina/vt-pulse.jpg" alt="Polo PULSE gris (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>PULSE</h3><p class="vt-sub">Polo · slim, poliéster y elastano</p>
-              <p class="vt-price">Precio por confirmar</p>
-              <a class="vt-buy" href="#" data-buy="pulse">COMPRAR</a>
-            </article>
-            <article class="vt-card reveal">
+            <article class="vt-card reveal" data-cat="camisetas">
               <div class="vt-media"><img src="assets/vitrina/vt-axiom.jpg" alt="Camiseta AXIOM blanca (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>AXIOM</h3><p class="vt-sub">Camiseta · regular, algodón y elastano</p>
+              <p class="vt-cat">CAMISETA</p><h3>AXIOM</h3><p class="vt-sub">Camiseta · regular, algodón y elastano</p>
               <p class="vt-price">Precio por confirmar</p>
               <a class="vt-buy" href="#" data-buy="axiom">COMPRAR</a>
             </article>
-            <article class="vt-card reveal">
+            <article class="vt-card reveal" data-cat="camisetas">
               <div class="vt-media"><img src="assets/vitrina/vt-drift.jpg" alt="Camiseta DRIFT verde (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>DRIFT</h3><p class="vt-sub">Camiseta · loose, algodón peach</p>
+              <p class="vt-cat">CAMISETA</p><h3>DRIFT</h3><p class="vt-sub">Camiseta · loose, algodón peach</p>
               <p class="vt-price">Precio por confirmar</p>
               <a class="vt-buy" href="#" data-buy="drift">COMPRAR</a>
             </article>
-            <article class="vt-card reveal">
+            <article class="vt-card reveal" data-cat="polo">
+              <div class="vt-media"><img src="assets/vitrina/vt-pulse.jpg" alt="Polo PULSE gris (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
+              <p class="vt-cat">POLO</p><h3>PULSE</h3><p class="vt-sub">Polo · slim, poliéster y elastano</p>
+              <p class="vt-price">Precio por confirmar</p>
+              <a class="vt-buy" href="#" data-buy="pulse">COMPRAR</a>
+            </article>
+            <article class="vt-card reveal" data-cat="pantalon">
               <div class="vt-media"><img src="assets/vitrina/vt-vector.jpg" alt="Pantalón VECTOR (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>VECTOR</h3><p class="vt-sub">Pantalón · modern slim</p>
+              <p class="vt-cat">PANTALÓN</p><h3>VECTOR</h3><p class="vt-sub">Pantalón · modern slim</p>
               <p class="vt-price">Precio por confirmar</p>
               <a class="vt-buy" href="#" data-buy="vector">COMPRAR</a>
             </article>
-            <article class="vt-card reveal">
+            <article class="vt-card reveal" data-cat="chaqueta">
               <div class="vt-media"><img src="assets/vitrina/vt-nimbus.jpg" alt="Chaqueta NIMBUS (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>NIMBUS</h3><p class="vt-sub">Chaqueta impermeable · slim</p>
+              <p class="vt-cat">CHAQUETA</p><h3>NIMBUS</h3><p class="vt-sub">Chaqueta impermeable · slim</p>
               <p class="vt-price">Precio por confirmar</p>
               <a class="vt-buy" href="#" data-buy="nimbus">COMPRAR</a>
             </article>
-            <article class="vt-card reveal">
+            <article class="vt-card reveal" data-cat="calzado">
               <div class="vt-media"><img src="assets/vitrina/vt-quanta.jpg" alt="Zapatillas QUANTA TRAIL (foto de catálogo provisional)" loading="lazy"><span class="vt-badge">NUEVO PRODUCTO</span></div>
-              <h3>QUANTA TRAIL</h3><p class="vt-sub">Zapatillas trail</p>
+              <p class="vt-cat">CALZADO</p><h3>QUANTA TRAIL</h3><p class="vt-sub">Zapatillas trail</p>
               <p class="vt-price">Precio por confirmar</p>
               <a class="vt-buy" href="#" data-buy="quanta-trail">COMPRAR</a>
             </article>
@@ -709,30 +733,14 @@
       <!-- ============ 07 · BANNER FINAL — cierre de marca (referente: banner de campaña) ============
            Lleva a James: aquí no se muestra ni se menciona calzado (manual p.5). -->
       <section class="banner" id="banner" aria-labelledby="banner-title">
-        <div class="banner-frame">
+        <div class="banner-frame is-valla">
           <h2 id="banner-title" class="visually-hidden">QUEST[LAB] · PROJECT James Rodríguez</h2>
-
-          <!-- Foto de James con estela de movimiento y luz azul (QL Blue) -->
-          <div class="banner-photo" aria-hidden="true">
-            <img class="banner-img" src="assets/fotos/james-banner.jpg" alt="">
-            <img class="banner-ghost" src="assets/fotos/james-banner.jpg" alt="">
-            <span class="banner-light"></span>
-          </div>
-
-          <img class="banner-logo" src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
-          <img class="banner-logo-lab" src="assets/brand/lab-mark.png" alt="" aria-hidden="true">
-
-          <div class="banner-project"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></div>
-
-          <!-- Códigos técnicos (textos de apoyo del manual) -->
-          <p class="banner-code tl">03°25'49"N / 076°31'11"W <span class="dim">+ PROTOCOL: OBSERVE / TEST / REFINE</span><br>
-            <span class="indent">Q95 / LAB26<br>APPLICATION: DAILY MOVEMENT<br>DESIGNED TO ADAPT.</span></p>
-          <p class="banner-code tr">NOTHING WITHOUT PURPOSE.<br><span class="dim">SYS.1995 / MODULE: LAB_2026</span></p>
-          <p class="banner-code bc dim">QUEST [LAB]<br>NOTHING TO PROVE.<br>PROVE YOURSELF.<br><span class="indent">APPLICATION: DAILY MOVEMENT</span></p>
-
-          <!-- Mira y escala técnica (recursos gráficos del manual) -->
-          <div class="banner-scale" aria-hidden="true"><span>00</span><i></i><span>95</span></div>
-          <svg class="banner-target" viewBox="0 0 100 100" aria-hidden="true"><path d="M8 4H4v92h4M92 4h4v92h-4"/><circle cx="50" cy="50" r="30"/><path d="M50 14v72M14 50h72"/></svg>
+          <!-- Valla oficial de la campaña (Impresión valla real 16,1x6 m.ai), sin la dirección web -->
+          <picture>
+            <source media="(max-width: 760px)" srcset="assets/fotos/valla-james-movil.jpg">
+            <img class="banner-valla" src="assets/fotos/valla-james.jpg" srcset="assets/fotos/valla-james-1600.jpg 1600w, assets/fotos/valla-james.jpg 3200w" sizes="100vw"
+               alt="Valla QUEST[LAB] · PROJECT James Rodríguez: James mira hacia arriba con chaqueta, junto al logo QUEST[LAB]" loading="lazy" width="3200" height="1198">
+          </picture>
         </div>
       </section>
 

@@ -21,3 +21,6 @@ _version-anterior/
 
 # Sistema
 .DS_Store
+
+# Archivo fuente de Illustrator de la valla (87 MB)
+*.ai

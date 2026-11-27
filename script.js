@@ -25,6 +25,8 @@
         const sib = $$(".reveal", el.parentElement);
         el.style.transitionDelay = Math.min(sib.indexOf(el), 5) * 0.07 + "s";
         el.classList.add("is-in");
+        // al terminar la entrada se quita el retraso, para que el hover responda al instante
+        setTimeout(() => (el.style.transitionDelay = ""), 1300);
         io.unobserve(el);
       });
     }, { threshold: 0.12 });
@@ -69,6 +71,32 @@
       });
     });
     new IntersectionObserver(([e]) => { inView = e.isIntersecting; playActive(); }, { threshold: 0.25 }).observe($(".pv-stage", section));
+
+    // Flechas a los lados: pasan a la prenda anterior o siguiente (en círculo, por las 7 prendas)
+    const stage = $(".pv-stage", section);
+    const step = (d) => {
+      const i = tabs.findIndex((b) => b.classList.contains("is-active"));
+      tabs[(i + d + tabs.length) % tabs.length].click();
+    };
+    [["prev", -1, "Prenda anterior", "M15 5 8 12l7 7"], ["next", 1, "Prenda siguiente", "m9 5 7 7-7 7"]].forEach(([cls, d, label, path]) => {
+      const bt = document.createElement("button");
+      bt.type = "button"; bt.className = "pv-arrow " + cls; bt.setAttribute("aria-label", label);
+      bt.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg>`;
+      bt.addEventListener("click", () => step(d));
+      stage.appendChild(bt);
+    });
+    // Las flechas quedan fijas en el mismo lugar para todas las prendas: se mide una sola vez
+    // (centro de la galería de la prenda inicial) y solo se recalcula si cambia el ancho de pantalla
+    let lastW = 0;
+    const placeArrows = (force) => {
+      if (!force && innerWidth === lastW) return;
+      lastW = innerWidth;
+      const m = $(".pv.is-active .pv-media", section);
+      if (m) stage.style.setProperty("--ay", (m.offsetTop + m.offsetHeight / 2) + "px");
+    };
+    addEventListener("resize", () => placeArrows());
+    addEventListener("load", () => placeArrows(true));
+    placeArrows(true);
 
     /* Recorrido automático: la línea lima de la prenda activa se llena con su porcentaje
        (como la lectura del escáner) y al llegar a 100% pasa a la siguiente prenda.
@@ -241,12 +269,24 @@
     const W = mobile ? 0.7 : 0.32, H = mobile ? 0.1 : 0.13;
     const home = mobile ? { x: 0.5, y: 0.42 } : { x: 0.48, y: 0.435 };
     let cx = home.x, cy = home.y, tx = home.x, ty = home.y, visible = false;
+    // Límite superior: la ventana nítida empieza debajo del logo (no se sube sobre él)
+    const logo = $(".hero-lockup");
+    let minY = H / 2 + 0.05;
+    const measure = () => {
+      if (!logo) return;
+      const r = el.getBoundingClientRect(), l = logo.getBoundingClientRect();
+      const tag = $(".frost-text.top", el), th = tag ? tag.offsetHeight + 12 : 0;   // texto que va encima de la ventana
+      if (r.height) minY = Math.max(H / 2 + 0.05, (l.bottom - r.top + th + 14) / r.height + H / 2);
+    };
+    measure();
+    addEventListener("resize", measure);
+    addEventListener("load", measure);
 
     if (canHover && !reduceMotion) {
       el.addEventListener("pointermove", (e) => {
         const r = el.getBoundingClientRect();
         tx = clamp((e.clientX - r.left) / r.width, W / 2, 1 - W / 2);
-        ty = clamp((e.clientY - r.top) / r.height, H / 2 + 0.05, 1 - H / 2 - 0.05);
+        ty = clamp((e.clientY - r.top) / r.height, minY, 1 - H / 2 - 0.05);
       });
       el.addEventListener("pointerleave", () => { tx = home.x; ty = home.y; });
     } else if (!reduceMotion) {
@@ -255,7 +295,7 @@
       const follow = () => {
         const r = el.getBoundingClientRect();
         const k = clamp(-r.top / (r.height * 0.55), 0, 1);
-        ty = clamp(home.y + k * 0.32, H / 2 + 0.05, 1 - H / 2 - 0.05);
+        ty = clamp(home.y + k * 0.32, minY, 1 - H / 2 - 0.05);
         tx = home.x;
       };
       addEventListener("scroll", follow, { passive: true });
@@ -364,9 +404,11 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     const progress = () => {
-      const r = section.getBoundingClientRect();
-      const total = r.height - innerHeight;
-      target = total > 0 ? clamp(-r.top / total, 0, 1) : 1;
+      // el color avanza exactamente mientras la cinta está fija en pantalla
+      const r = section.getBoundingClientRect(), st = section.firstElementChild;
+      const top = parseFloat(getComputedStyle(st).top) || 0;
+      const total = r.height - st.offsetHeight;
+      target = total > 0 ? clamp((top - r.top) / total, 0, 1) : 1;
     };
     size(); progress();
     addEventListener("resize", () => { size(); progress(); });
@@ -525,10 +567,39 @@
     });
   }
 
+  /* ---------- Vitrina: filtro por categoría ---------- */
+  function vitrinaTabs() {
+    const tabs = $$(".vt-tabs button"), cards = $$(".vt-card[data-cat]");
+    if (!tabs.length) return;
+    tabs.forEach((t) => t.addEventListener("click", () => {
+      const cat = t.dataset.cat;
+      tabs.forEach((b) => { const on = b === t; b.classList.toggle("is-active", on); b.setAttribute("aria-pressed", on); });
+      cards.forEach((c) => {
+        const show = cat === "all" || c.dataset.cat === cat;
+        c.hidden = !show;
+        if (show && !reduceMotion) { c.classList.remove("vt-in"); void c.offsetWidth; c.classList.add("vt-in"); }
+      });
+    }));
+  }
+
   progress();
   lifestyleParallax();
   looks();
   reveals();
+  // Calzado: el fondo de curvas llega solo hasta la línea que separa la ficha de los atributos
+  (function topoUntilLine() {
+    const sec = $("#xray"), line = $("#xray .xray-copy .pv-desc");
+    if (!sec || !line) return;
+    const set = () => {
+      // offsetTop acumulado (no le afectan las animaciones de entrada con transform)
+      let y = line.offsetHeight, el = line;
+      while (el && el !== sec) { y += el.offsetTop; el = el.offsetParent; }
+      if (el === sec) sec.style.setProperty("--topo-h", y + "px");
+    };
+    set();
+    addEventListener("resize", set);
+    addEventListener("load", () => { set(); dispatchEvent(new Event("resize")); });
+  })();
   $$(".topo").forEach(topo);
   scanner();
   ribbon();
@@ -536,6 +607,7 @@
   xrayGallery();
   frost();
   productViewer();
+  vitrinaTabs();
   videoToggles();
   videos();
 })();
