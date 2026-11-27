@@ -461,7 +461,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    HERO = sección de James con vidrio esmerilado (antes Campaña)
    ========================================================= */
 .hero-campaign { background: var(--black); }
-.hero-campaign .campaign-frame { min-height: calc(100svh - var(--gutter) * 1.2); }
+.hero-campaign .campaign-frame { min-height: calc(100svh - var(--gutter) * 1.2 - 64px); }   /* deja espacio para el botón debajo */
 .hero-campaign .campaign-frame::after {
   background: linear-gradient(180deg, rgba(0,0,0,.6) 0%, transparent 22%, transparent 55%, rgba(0,0,0,.8) 100%); }
 .hero-campaign .hero-lockup, .hero-campaign .hero-code, .hero-campaign .hero-index, .hero-campaign .slogan-slot { z-index: 4; }
@@ -799,6 +799,17 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .scan-nav button { width: 26px; height: 26px; border-radius: 50%; color: var(--white); font-size: 12px; cursor: pointer; transition: background 0.3s, color 0.3s; }
 .scan-nav button:hover { background: var(--lime); color: var(--black); }
 
+/* Hero: botón hacia la Colección — mismo aspecto del recuadro anterior (transparente, línea fina)
+   y en lima al pasar el cursor. Va debajo de la foto para no tapar a James. */
+.hero-campaign .hero-cta { display: flex; justify-content: center; padding: 10px 0 0; }
+.hero-cta .btn { width: min(420px, 70%); }
+.hero-cta .btn { min-height: 44px; justify-content: center; padding: 0 1.6rem; border-radius: 6px;
+  background: rgba(0,0,0,.25); color: var(--white); border: 1px dashed rgba(255,255,255,.45);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 0.3s, color 0.3s, border-color 0.3s; }
+.hero-cta .btn span { transition: transform 0.3s var(--ease); }
+.hero-cta .btn:hover { background: var(--lime); color: var(--black); border-color: var(--lime); border-style: solid; }
+.hero-cta .btn:hover span { transform: translateY(3px); }
+
 /* =========================================================
    FONDO TOPOGRÁFICO (referente IMG_3052)
    ========================================================= */
@@ -858,10 +869,10 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .campaign-frame { cursor: crosshair; }
 .campaign-frame::after { background: linear-gradient(0deg, rgba(0,0,0,.55), transparent 35%); pointer-events: none; }
 .frost-base, .frost-sharp { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 28%; transform: scale(1.06); }
-.frost-base { filter: grayscale(1) contrast(1.1) brightness(0.72) blur(22px); }
-.frost-sharp { z-index: 1; filter: grayscale(1) contrast(1.22) brightness(0.95);
+.frost-base { filter: grayscale(1) contrast(1.08) brightness(1.02) blur(4px); }   /* menos desenfoque: se lee la silueta de James */
+.frost-sharp { z-index: 1; filter: grayscale(1) contrast(1.18) brightness(1.12);
   clip-path: inset(var(--t, 37%) var(--r, 12%) var(--b, 49%) var(--l, 38%)); }
-.frost-noise { position: absolute; inset: 0; pointer-events: none; opacity: 0.35; mix-blend-mode: overlay;
+.frost-noise { position: absolute; inset: 0; pointer-events: none; opacity: 0.25; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .frost-window { position: absolute; z-index: 3; top: var(--t, 37%); right: var(--r, 12%); bottom: var(--b, 49%); left: var(--l, 38%); pointer-events: none; }
 .frost-window .corner { width: 12px; height: 12px; }
@@ -909,7 +920,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   .tech-grid { grid-template-columns: 1fr; }
   .tech-card, .tech-card + .tech-card { padding-left: 0; border-left: 0; min-height: 0; border-top: 1px solid var(--line-light); }
   .kicker span:last-child { display: none; }
-  .frost-base, .frost-sharp { object-position: 64% 30%; }
+  .frost-base, .frost-sharp { object-position: 55% 30%; }   /* cara de James centrada en celular */
   .slogan-slot { width: calc(100% - 3rem); bottom: 5.5rem; }
   .frost-text.top { left: 0; }
   .frost-text.bottom { right: 0; }
@@ -935,4 +946,356 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* =========================================================
+   QUANTA TRAIL · fondo blanco + atributos con el mismo formato de las fichas de producto
+   ========================================================= */
+.xray { --line-dark: rgba(0, 0, 0, 0.14); background: var(--white); color: var(--black); }
+.xray .topo { filter: invert(1); }                                   /* curvas de nivel oscuras sobre blanco */
+.xray .kicker span:last-child { color: var(--blue); }
+.xray-eyebrow { color: var(--black); }                               /* el lima no se lee sobre blanco (manual) */
+.xray .lead-sm { color: var(--gargoyle); }
+.xray-icon svg { --node-fill: var(--white); stroke: var(--black); }
+.xray .btn-solid { background: var(--black); color: var(--white); }
+.xray .btn-solid:hover { background: var(--lime); color: var(--black); }
+.xray-official, .xray .scanner { border-color: rgba(0, 0, 0, 0.12); }
+/* Lista de atributos = .pv-attrs, en versión clara */
+.xray-list.pv-attrs { margin-top: 2rem; border-top: 0; }
+.xray-list.pv-attrs li { display: grid; grid-template-columns: 26px 1fr; align-items: center; gap: 0.9rem; padding: 0.7rem 0; border-bottom: 0;
+  color: var(--black); opacity: 0.45; transition: opacity 0.4s; }
+.xray-list.pv-attrs li::before { display: none; }
+.xray-list.pv-attrs li.is-on { padding-left: 0; opacity: 1; }        /* el atributo que lee el escáner */
+.xray-list.pv-attrs .ti { stroke: var(--black); }
+.xray-list.pv-attrs li div { border-left-color: rgba(0, 0, 0, 0.35); }
+.xray-list.pv-attrs li span { font-size: 10.5px; padding-top: 0; color: var(--gargoyle); }
+
+.xray-official figcaption { color: var(--white); }                    /* texto sobre la imagen oscura */
+.scan-base { filter: contrast(1.05) brightness(0.9) blur(1.5px); }      /* foto del escáner a color */
+
+/* =========================================================
+   COLECCIÓN · mosaico por prenda: 1 foto grande + 1 video + 1 foto de detalle
+   ========================================================= */
+.pv-media.pv-mosaic { display: grid; grid-template-columns: 1.15fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; background: transparent; border-radius: 0; overflow: visible; }
+.pv-cell { position: relative; overflow: hidden; border-radius: 16px; background: var(--jet-black); }
+.pv-cell.is-main { grid-row: 1 / 3; }
+.pv-cell > img, .pv-cell > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.12); }
+.pv-cell.is-main > img { object-position: 50% 30%; }
+.pv-mosaic .pv-hud { border-radius: 16px; overflow: hidden; }
+.pv-mosaic .pv-hud::before { right: 47%; border-bottom-left-radius: 16px; }   /* sombra solo bajo la lectura técnica */
+.pv.is-active .pv-cell > * { animation: pvCell 0.9s var(--ease) both; }
+.pv.is-active .pv-cell.is-video > * { animation-delay: 0.08s; }
+.pv.is-active .pv-cell.is-detail > * { animation-delay: 0.16s; }
+@keyframes pvCell { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pv.is-active .pv-cell > * { animation: none; } }
+
+/* =========================================================
+   QUANTA TRAIL · misma distribución que la Colección (mosaico a la izquierda, ficha a la derecha)
+   ========================================================= */
+.xray-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+.xray-mosaic { position: relative; display: grid; grid-template-columns: 1.15fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; aspect-ratio: 4 / 5; max-height: 68vh; width: 100%; }
+.xray-mosaic .pv-cell > .scanner, .xray-mosaic .pv-cell > .xray-official { position: absolute; inset: 0; aspect-ratio: auto; width: 100%; height: 100%; margin: 0; border: 0; border-radius: 16px; }
+.xray-mosaic .pv-cell > video { filter: grayscale(1) contrast(1.12); }
+.xray-mosaic .xray-official { display: block; }
+.xray-mosaic .scan-nav { top: 10px; transform: translateX(-50%) scale(0.9); }
+.xray-mosaic .xray-official figcaption { padding: 0.7rem 0.8rem; font-size: 8px; }
+.xray-mosaic .scanner-tag { font-size: 8px; }
+@media (max-width: 1100px) { .xray-grid { grid-template-columns: 1fr 1fr; } .xray-copy { grid-column: auto; } }
+@media (max-width: 760px) {
+  .xray-grid { grid-template-columns: 1fr; }
+  .xray-mosaic { max-height: none; }
+  .xray-mosaic .xray-official { display: block; }
+}
+
+/* Quanta Trail: ficha igual a las prendas, en versión clara */
+.xray-copy .pv-slash { color: var(--black); }
+.xray-copy .pv-concept { color: var(--black); }                      /* el lima solo en el punto: no se lee sobre blanco */
+.xray-copy .pv-fit { color: var(--black); border-left-color: rgba(0,0,0,.25); }
+.xray-copy .pv-desc { border-bottom-color: var(--black); }
+.xray-copy .pv-label { color: var(--blue); }
+.xray-copy .xray-list.pv-attrs { margin-top: 0; }
+
+/* Quanta Trail: ícono en la misma barra que el menú de la Colección (un solo botón activo) */
+.xray-menu { --line-dark: rgba(0,0,0,.14); grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.xray-menu span { position: relative; display: grid; justify-items: center; gap: 0.35rem; padding: 1.3rem 0.5rem 1.1rem; grid-column: 4; color: var(--black);
+  background: rgba(0,0,0,.04); border-left: 1px solid var(--line-dark); border-right: 1px solid var(--line-dark); }
+.xray-menu span::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--lime); }
+.xray-menu svg { --node-fill: var(--white); stroke: var(--black); }
+@media (max-width: 760px) { .xray-menu { display: grid; grid-template-columns: 1fr; } .xray-menu span { grid-column: 1; border: 0; } }
+
+/* Colección y Quanta Trail: fotos y videos a color, como los originales */
+.pv-media video, .pv-media .pv-photo, .pv-cell > img, .pv-cell > video,
+.xray-mosaic .pv-cell > video, .xray-official img { filter: none; }
+
+/* Ícono del Quanta Trail: debajo del título de la sección, a la izquierda */
+.xray-menu { display: inline-grid; grid-template-columns: 1fr; margin-top: clamp(1.5rem, 3vw, 2.5rem); border: 0; }
+.xray-menu span { grid-column: 1; width: clamp(150px, 14vw, 190px); border: 1px solid var(--line-dark); border-top: 0; }
+@media (max-width: 760px) { .xray-menu span { width: 150px; border: 1px solid var(--line-dark); border-top: 0; } }
+.xray-menu + .xray-grid { padding-top: clamp(1.2rem, 2.5vw, 2rem); }
+
+/* Quanta Trail: imágenes alineadas con la ficha, como en la Colección
+   (nombre en una sola línea y el mosaico ocupa el alto de la ficha) */
+.xray-copy .pv-name { font-size: clamp(2.4rem, 4.4vw, 4.8rem); white-space: nowrap; }
+@media (min-width: 761px) {
+  .xray-grid { align-items: stretch; }
+  .xray-mosaic { aspect-ratio: auto; max-height: none; height: 100%; min-height: 480px; }
+}
+
+/* James · Looks: fotos con su color original (se mantienen el desenfoque de entrada y el movimiento) */
+.look-img { filter: contrast(1.05); }
+.look.reveal .look-img { filter: contrast(1.05) blur(14px); }
+.look.reveal.is-in .look-img { filter: contrast(1.05) blur(0); }
+.look-ghost { filter: brightness(1.05) url(#motion-ghost); }
+@media (prefers-reduced-motion: reduce) { .look.reveal .look-img { filter: contrast(1.05); } }
+
+/* =========================================================
+   LIFESTYLE · una sola pantalla (escritorio): texto + 5 fotos en 2 filas
+   | texto / m1 | m2 alta | m3 / m4 | m5 alta |
+   ========================================================= */
+@media (min-width: 761px) {
+  .lifestyle { min-height: 100svh; display: flex; align-items: center; padding: clamp(2rem, 4vh, 3rem) 0; }
+  .lifestyle .wrap { width: min(100% - var(--gutter) * 2, 1440px); }
+  .ls-grid.ls-grid-5 { grid-template-rows: 1fr 1fr; grid-auto-rows: auto; height: calc(100svh - clamp(8rem, 16vh, 10.5rem)); min-height: 460px; padding-top: clamp(1rem, 2.5vh, 1.6rem); }
+  .ls-grid-5 .ls-text { grid-column: 1 / 4;  grid-row: 1 / 2; justify-content: flex-end; }
+  .ls-grid-5 .ls-m1   { grid-column: 1 / 4;  grid-row: 2 / 3; }
+  .ls-grid-5 .ls-m2   { grid-column: 4 / 7;  grid-row: 1 / 3; }
+  .ls-grid-5 .ls-m3   { grid-column: 7 / 10; grid-row: 1 / 2; }
+  .ls-grid-5 .ls-m4   { grid-column: 7 / 10; grid-row: 2 / 3; }
+  .ls-grid-5 .ls-m5   { grid-column: 10 / 13; grid-row: 1 / 3; }
+  .ls-grid-5 .ls-text .title { font-size: clamp(1.4rem, 2.2vw, 2.3rem); }
+  .ls-grid-5 .ls-text .lead-sm { font-size: 11px; line-height: 1.7; }
+}
+
+/* =========================================================
+   CINTA DE MOVIMIENTO — sección fija mientras se recorre (2 pantallas de scroll)
+   ========================================================= */
+.motion { position: relative; height: 220vh; background: var(--black); color: var(--white); }
+.motion-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.motion-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.motion-ui { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(2rem, 5vh, 3.5rem) 0; pointer-events: none; }
+.motion-code { align-self: flex-end; text-align: right; font-size: 9px; letter-spacing: 0.14em; line-height: 1.8; color: var(--gargoyle); }
+.motion-code span { color: var(--lime); }
+@media (prefers-reduced-motion: reduce) { .motion { height: 100svh; } }
+
+/* Cinta: sección menos alta (franja de ~70 % de pantalla y menos recorrido) */
+.motion { height: 150vh; }
+.motion-sticky { top: 15svh; height: 70svh; }
+.motion-ui { padding: clamp(1.2rem, 3vh, 2rem) 0; }
+@media (prefers-reduced-motion: reduce) { .motion { height: 70svh; } .motion-sticky { top: 0; } }
+
+/* Lifestyle en negro (sigue a la cinta) */
+.lifestyle { background: var(--black); color: var(--white); }
+.lifestyle .kicker { border-color: var(--line-dark); color: var(--gargoyle); }
+.lifestyle .kicker span:last-child { color: var(--blue-soft); }
+.lifestyle .lead-sm { color: var(--gargoyle); }
+
+/* =========================================================
+   ÍNDICE DE PRENDAS (referente integrated-reasoning, diapositiva "Y Combinator")
+   ========================================================= */
+.press { position: relative; padding: clamp(3rem, 7vh, 5rem) 0; background: var(--cloud-dancer); color: var(--black); --line-dark: rgba(0,0,0,.14); }
+.press .kicker span:last-child { color: var(--blue); }
+.px-stage { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, 240px); gap: clamp(1.5rem, 3vw, 3rem); min-height: clamp(560px, 78vh, 760px); padding-top: clamp(1.5rem, 3vh, 2.5rem); }
+.px-slide { grid-column: 1; grid-row: 1; display: grid; grid-template-columns: 1fr 1.3fr 1fr; grid-template-rows: auto 1fr auto; column-gap: clamp(1rem, 3vw, 3rem); row-gap: clamp(1.5rem, 4vh, 3rem);
+  opacity: 0; visibility: hidden; transition: opacity 0.6s var(--ease), visibility 0s 0.6s; }
+.px-slide.is-active { opacity: 1; visibility: visible; transition: opacity 0.6s var(--ease); }
+.px-title { grid-column: 1 / -1; margin: 0; font-size: clamp(3.4rem, 9vw, 9rem); font-weight: 500; letter-spacing: -0.06em; line-height: 0.9; white-space: nowrap; }
+.px-title sup { font-size: 0.32em; vertical-align: 1.55em; font-weight: 400; margin-left: 0.04em; }
+.px-lead { margin: 0; font-size: clamp(14px, 1.45vw, 20px); font-weight: 500; letter-spacing: -0.01em; line-height: 1.2; }
+.px-icon { position: relative; align-self: center; justify-self: center; width: min(100%, 360px); aspect-ratio: 1; perspective: 900px; }
+.px-spin { position: absolute; inset: 6% 10% 22%; transform-style: preserve-3d; animation: pxSpin 9s ease-in-out infinite; }
+.px-spin svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--black); stroke-width: 0.7; stroke-linejoin: round; stroke-linecap: round; --node-fill: var(--cloud-dancer);
+  transform: translateZ(calc(var(--z) * -14px)); opacity: calc(1 - var(--z) * 0.24); }
+.px-spin svg circle { fill: var(--black); stroke: none; }
+.px-floor { position: absolute; left: 4%; right: 4%; bottom: 6%; height: 38%; transform: rotateX(72deg); transform-origin: bottom;
+  background-image: linear-gradient(rgba(0,0,0,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.35) 1px, transparent 1px); background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); mask-image: radial-gradient(closest-side, #000 55%, transparent); }
+@keyframes pxSpin { 0%, 100% { transform: rotateX(14deg) rotateY(-32deg); } 50% { transform: rotateX(8deg) rotateY(32deg); } }
+.px-slide.is-active .px-spin svg { animation: pxDraw 1.4s var(--ease) both; }
+@keyframes pxDraw { from { stroke-dasharray: 0 400; } to { stroke-dasharray: 400 0; } }
+.px-quote { align-self: start; }
+.px-quote p { margin: 0; font-size: clamp(14px, 1.45vw, 20px); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
+.px-mark { display: block; margin-top: 0.6rem; font-size: 2.6rem; line-height: 0.6; font-weight: 700; }
+.px-btn { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 2rem; padding: 0.7rem 1.6rem; border: 1px solid var(--black); border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+.px-btn:hover { background: var(--lime); border-color: var(--lime); }
+.px-meta { grid-column: 1 / -1; display: flex; gap: clamp(2rem, 8vw, 9rem); margin: 0; font-size: 10px; letter-spacing: 0.12em; color: var(--gargoyle); }
+.px-tiles { grid-column: 2; grid-row: 1; align-self: end; display: grid; gap: 1.2rem; }
+.px-tile { position: relative; display: grid; justify-items: center; gap: 0.4rem; padding: 1.4rem 1rem 1.1rem; aspect-ratio: 5 / 3; align-content: center; }
+.px-tile svg { width: 54px; height: 54px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
+.px-tile svg circle { fill: currentColor; stroke: none; }
+.px-tile b { font-size: 11px; letter-spacing: 0.1em; font-weight: 600; }
+.px-tile small { font-size: 9px; letter-spacing: 0.12em; opacity: 0.6; }
+.px-tile.is-next { border: 1px solid rgba(0,0,0,.45); color: var(--black); cursor: pointer; --node-fill: var(--cloud-dancer); transition: background 0.3s; }
+.px-tile.is-next:hover { background: rgba(0,0,0,.05); }
+.px-tile.is-current { background: var(--black); color: var(--white); --node-fill: var(--black); }
+.px-bar { position: absolute; left: 0; right: 0; top: -8px; height: 6px; background: var(--gargoyle); }
+.px-bar i { position: absolute; inset: 0; background: var(--lime); transform-origin: left; transform: scaleX(var(--p, 0)); }
+@media (max-width: 900px) {
+  .px-stage { grid-template-columns: 1fr; min-height: 0; }
+  .px-slide { grid-template-columns: 1fr 1fr; }
+  .px-title { font-size: clamp(2.6rem, 13vw, 5rem); }
+  .px-icon { grid-column: 1 / -1; grid-row: 3; width: min(80%, 300px); }
+  .px-quote { grid-row: 2; }
+  .px-meta { grid-row: 4; flex-direction: column; gap: 0.3rem; }
+  .px-tiles { grid-column: 1; grid-row: 2; grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .px-spin, .px-slide.is-active .px-spin svg { animation: none; } }
+@media (max-width: 900px) {
+  .px-slide { grid-template-columns: minmax(0, 1fr); row-gap: 1.4rem; }
+  .px-lead, .px-quote, .px-icon, .px-meta { grid-column: 1; grid-row: auto; }
+  .px-tiles { grid-column: 1; grid-row: 2; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0.8rem; }
+  .px-tile { min-width: 0; aspect-ratio: auto; padding: 1rem 0.6rem; }
+  .px-btn { margin-top: 1.2rem; }
+}
+
+/* Índice: el ícono se dibuja trazo a trazo (reemplaza el giro 3D) */
+.px-icon { perspective: none; }
+.px-draw { position: absolute; inset: 4%; width: 92%; height: 92%; fill: none; stroke: var(--black); stroke-width: 0.32; stroke-linejoin: round; stroke-linecap: round; overflow: visible; }
+.px-draw .node { fill: var(--black); stroke: none; opacity: 0; transition: opacity 0.4s; }
+.px-draw .node.is-on { opacity: 1; }
+
+
+/* Índice: cambio de prenda más ágil */
+.px-slide { transition: opacity 0.3s var(--ease), visibility 0s 0.3s; }
+.px-slide.is-active { transition: opacity 0.3s var(--ease); }
+.px-slide { transition: opacity 0.2s var(--ease), visibility 0s 0.2s; }
+.px-slide.is-active { transition: opacity 0.2s var(--ease); }
+
+/* =========================================================
+   RESPONSIVE · ajustes de revisión
+   ========================================================= */
+.banner-frame { width: 100%; max-width: 100%; }
+@media (max-width: 1100px) { .banner-frame { aspect-ratio: auto; min-height: 440px; } }
+
+/* Tablet (761–1023 px): una columna en Colección y Quanta Trail; Lifestyle en 2 columnas */
+@media (min-width: 761px) and (max-width: 1023px) {
+  .pv { grid-template-columns: 1fr; gap: 2rem; }
+  .pv-media.pv-mosaic { aspect-ratio: 4 / 3; max-height: none; }
+  .xray-grid { grid-template-columns: 1fr; align-items: start; gap: 2rem; }
+  .xray-mosaic { aspect-ratio: 4 / 3; height: auto; min-height: 0; max-height: none; }
+  .lifestyle { min-height: 0; display: block; padding: clamp(4rem, 8vw, 6rem) 0; }
+  .ls-grid.ls-grid-5 { height: auto; min-height: 0; grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: 38vw; }
+  .ls-grid-5 .ls-text { grid-column: 1 / -1; grid-row: auto; }
+  .ls-grid-5 .ls-m1, .ls-grid-5 .ls-m4, .ls-grid-5 .ls-m5 { grid-column: 1 / -1; grid-row: auto; }
+  .ls-grid-5 .ls-m2, .ls-grid-5 .ls-m3 { grid-column: auto; grid-row: auto; }
+}
+@media (min-width: 761px) and (max-width: 1023px) {
+  .ls-grid.ls-grid-5 { grid-auto-rows: auto; }
+  .ls-grid-5 .ls-text { order: -1; padding-bottom: 0.5rem; }
+  .ls-grid-5 .ls-item { height: 38vw; }
+}
+
+/* =========================================================
+   ACCESIBILIDAD
+   ========================================================= */
+/* Contraste: el Gargoyle del manual (#686767) da 3,7:1 sobre negro; para texto pequeño sobre fondo oscuro
+   se usa un tono más claro de la misma familia (#8f8e8e ≈ 6,4:1). Sobre fondos claros se mantiene Gargoyle. */
+:root { --gargoyle-on-dark: #8f8e8e; }
+.tech .kicker, .collection .kicker, .looks .kicker, .lifestyle .kicker, .motion .kicker,
+.tech .lead-sm, .collection .lead-sm, .looks .lead-sm, .lifestyle .lead-sm,
+.tech-foot, .pv-cat, .pv-specs dt, .pv-attrs li span, .motion-code, .hero-code.right { color: var(--gargoyle-on-dark); }
+.pv-meta { color: var(--gargoyle-on-dark); font-size: 9px; }
+.pv-menu button { color: var(--gargoyle-on-dark); }
+.pv-menu small { opacity: 1; }
+.hud-list li { font-size: 9px; }
+/* Foco visible y consistente en todos los controles */
+:where(a, button, [tabindex]):focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+/* Botón para pausar cada video (los videos se repiten solos) */
+.vid-toggle { position: absolute; z-index: 4; right: 10px; bottom: 10px; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%;
+  background: rgba(0,0,0,.45); color: var(--white); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  font-size: 11px; line-height: 1; cursor: pointer; opacity: 0.75; transition: opacity 0.3s, background 0.3s, color 0.3s; }
+.vid-toggle:hover, .vid-toggle:focus-visible { opacity: 1; background: var(--lime); color: var(--black); }
+.xray-copy .pv-cat, .xray-copy .pv-specs dt { color: var(--gargoyle); }   /* sobre blanco el Gargoyle sí cumple (5,6:1) */
+
+/* Celulares pequeños (≤ 420 px): textos de las tarjetas del Quanta Trail sin cortarse */
+@media (max-width: 420px) {
+  .xray-mosaic .scanner-tag { width: 88%; white-space: normal; text-align: center; font-size: 7px; line-height: 1.4; bottom: 10px; }
+  .xray-mosaic .xray-official figcaption { flex-direction: column; gap: 0.2rem; font-size: 7px; padding: 0.5rem 0.6rem; }
+  .xray-mosaic .scan-nav { transform: translateX(-50%) scale(0.8); }
+}
+
+/* =========================================================
+   LOGO [LAB] EN RESPONSIVE (manual p.3: variación con [LAB] en corchetes)
+   ========================================================= */
+.lockup-lab, .banner-logo-lab { display: none; }
+@media (max-width: 760px) {
+  .hero-lockup img:not(.lockup-lab), .hero-lockup .lockup-dot, .hero-lockup .lockup-project { display: none; }
+  .hero-lockup .lockup-lab { display: block; width: min(62vw, 250px); height: auto; filter: none; }
+  .banner-logo { display: none; }
+  .banner-logo-lab { display: block; position: absolute; z-index: 2; left: 50%; top: 8%; transform: translateX(-50%); width: min(46%, 220px); height: auto; }
+}
+
+/* Celular: hero más corto para que el botón "Ver la colección" quede más arriba */
+@media (max-width: 760px) {
+  .hero-campaign .campaign-frame { min-height: 74svh; }
+  .hero-campaign .hero-cta { padding-top: 14px; }
+}
+
+/* =========================================================
+   COLECCIÓN EN RESPONSIVE (≤ 1023 px):
+   íconos arriba en carrusel horizontal → nombre → imágenes → atributos
+   ========================================================= */
+@media (max-width: 1023px) {
+  .collection .wrap { display: flex; flex-direction: column; }
+  .collection .pv-menu { order: 1; margin: 1.6rem 0 1.8rem; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .collection .pv-menu::-webkit-scrollbar { display: none; }
+  .collection .pv-menu button { flex: 0 0 auto; width: clamp(104px, 28vw, 150px); scroll-snap-align: center; }
+  .collection .pv-stage { order: 2; }
+  .pv.is-active { display: flex; flex-direction: column; gap: 0; }
+  .pv .pv-info { display: contents; }
+  .pv .pv-cat { order: 1; }
+  .pv .pv-name { order: 2; margin: 0.3rem 0 0.8rem; }
+  .pv .pv-concept { order: 3; }
+  .pv .pv-desc { order: 4; margin: 1rem 0 1.4rem; padding-bottom: 0; border-bottom: 0; }
+  .pv .pv-media { order: 5; margin-bottom: 1.8rem; }
+  .pv .pv-specs { order: 6; }
+  .pv .pv-label { order: 7; }
+  .pv .pv-attrs { order: 8; }
+  .pv .pv-meta { order: 9; }
+}
+@media (max-width: 1023px) { .pv.is-active { align-items: stretch; text-align: left; } .pv .pv-concept { align-self: flex-start; } }
+
+/* =========================================================
+   CALZADO EN RESPONSIVE (≤ 1023 px): mismo orden que la Colección
+   ícono → nombre → imágenes → atributos → compra
+   ========================================================= */
+.xray-icon-m { display: none; }
+@media (max-width: 1023px) {
+  .xray-grid { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .xray-copy { display: contents; }
+  .xray-icon-m { order: 0; display: flex; margin: 0 0 1.8rem; border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
+  .xray-icon-m span { position: relative; display: grid; justify-items: center; gap: 0.35rem; width: clamp(104px, 28vw, 150px); padding: 1.3rem 0.5rem 1.1rem;
+    color: var(--black); background: rgba(0,0,0,.04); }
+  .xray-icon-m span::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--lime); }
+  .xray-icon-m svg { width: clamp(40px, 11vw, 54px); height: clamp(40px, 11vw, 54px); fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; --node-fill: var(--white); }
+  .xray-icon-m b { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; }
+  .xray-icon-m small { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gargoyle); }
+  .xray-copy .pv-cat { order: 1; }
+  .xray-copy .pv-name { order: 2; margin: 0.3rem 0 0.8rem; }
+  .xray-copy .pv-concept { order: 3; align-self: flex-start; }
+  .xray-copy .pv-desc { order: 4; margin: 1rem 0 1.4rem; padding-bottom: 0; border-bottom: 0; }
+  .xray-mosaic { order: 5; margin-bottom: 1.8rem; }
+  .xray-copy .pv-label { order: 6; }
+  .xray-copy .xray-list { order: 7; }
+  .xray-copy .xray-buy { order: 8; align-self: flex-start; }
+}
+
+/* =========================================================
+   ÍNDICE EN RESPONSIVE (≤ 900 px): carrusel con las 7 prendas en lugar de los dos recuadros
+   ========================================================= */
+.px-strip { display: none; }
+@media (max-width: 900px) {
+  .px-tiles { display: none; }
+  .px-strip { grid-column: 1; grid-row: 2; display: flex; gap: 0.6rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-top: 10px; }
+  .px-strip::-webkit-scrollbar { display: none; }
+  .px-strip-btn { position: relative; flex: 0 0 auto; width: clamp(118px, 34vw, 160px); display: grid; justify-items: center; gap: 0.35rem; padding: 1.1rem 0.5rem 0.9rem;
+    border: 1px solid rgba(0,0,0,.4); color: var(--black); background: transparent; scroll-snap-align: center; cursor: pointer; --node-fill: var(--cloud-dancer); transition: background 0.3s, color 0.3s; }
+  .px-strip-btn svg { width: 46px; height: 46px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
+  .px-strip-btn svg circle { fill: currentColor; stroke: none; }
+  .px-strip-btn b { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; }
+  .px-strip-btn small { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gargoyle); }
+  .px-strip-btn.is-active { background: var(--black); color: var(--white); border-color: var(--black); --node-fill: var(--black); }
+  .px-strip-btn.is-active small { color: var(--gargoyle-on-dark); }
+  .px-strip-bar { position: absolute; left: -1px; right: -1px; top: -9px; height: 5px; background: var(--gargoyle); opacity: 0; }
+  .px-strip-bar i { position: absolute; inset: 0; background: var(--lime); transform-origin: left; transform: scaleX(var(--p, 0)); }
+  .px-strip-btn.is-active .px-strip-bar { opacity: 1; }
 }

@@ -18,7 +18,9 @@
       02 Tecnología ...... manifiesto de marca (textos de las piezas oficiales)
       02 Colección ....... visor de una prenda a la vez + menú de íconos (7 prendas)
       03 Quanta Trail .... el calzado en su propio capítulo (X-Ray). Sin James (manual p.5)
+      -- Cinta ......... transición animada de líneas (scroll), separa calzado de James
       04 James · Looks ... galería de James con prendas (nunca calzado)
+      -- Índice ........ una prenda por diapositiva con su ícono en 3D de líneas (referente integrated-reasoning)
       05 Lifestyle ....... las prendas en uso real (fotos pendientes)
       06 Vitrina ......... tienda: 8 piezas con COMPRAR (precios y URLs pendientes)
       07 Banner final .... QUEST[LAB] + James · cierre de la página
@@ -39,10 +41,10 @@
           <div class="frost-window" aria-hidden="true">
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
             <p class="frost-text top"><span class="hl">//</span> NOTHING TO PROVE.</p>
-            <p class="frost-text bottom">DESIGNED TO ADAPT.</p>
+            <p class="frost-text bottom">PROVE YOURSELF.</p>
           </div>
 
-          <h1 id="hero-title" class="visually-hidden">QUEST[LAB] · PROJECT James Rodríguez. Designed to adapt.</h1>
+          <h1 id="hero-title" class="visually-hidden">QUEST[LAB] · PROJECT James Rodríguez. Prove yourself.</h1>
 
           <!-- Logo oficial de la colaboración (manual p.2): QUEST[LAB]® • PROJECT James Rodríguez.
                El bloque PROJECT está armado según el manual; reemplazar por el archivo oficial cuando llegue. -->
@@ -50,16 +52,17 @@
             <img src="assets/brand/quest-lab-wordmark.png" alt="">
             <span class="lockup-dot" aria-hidden="true"></span>
             <span class="lockup-project" aria-hidden="true"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></span>
+            <!-- Versión responsive: logo oficial [LAB] (manual p.3, variación vertical) -->
+            <img class="lockup-lab" src="assets/brand/lab-project-lockup.png" alt="">
           </div>
 
           <p class="hero-code left"><span class="lime-dot"></span>LANZAMIENTO 2026</p>
           <p class="hero-code right">Q95 / LAB26</p>
 
-          <!-- Eslogan oficial: usar el archivo gráfico, nunca texto en vivo (manual p.9) -->
-          <div class="slogan-slot">
-            <div class="slot slot-dark" data-label="PROVE YOURSELF / ARCHIVO OFICIAL"></div>
-          </div>
-
+        </div>
+        <!-- Llamado a la acción: debajo de la foto (no tapa a James), baja a la Colección -->
+        <div class="hero-cta">
+          <a class="btn" href="#coleccion">VER LA COLECCIÓN <span aria-hidden="true">↓</span></a>
         </div>
       </section>
 
@@ -77,6 +80,10 @@
       </section>
 
       <!-- ============ 02 · COLECCIÓN — una prenda a la vez + menú de íconos ============
+           Mosaico por prenda: foto grande (izq.) + video (der. arriba) + foto de detalle (der. abajo).
+           En PULSE, DRIFT y NIMBUS el video va en el espacio grande (alterna el ritmo entre prendas).
+           Fotos: cuadros de los videos de campaña (assets/producto-fotos). Videos: los de campaña completos (assets/video/*-completo.mp4);
+           HELIX, AXIOM y DRIFT: solo sus tomas del video de camisetas (helix/axiom/drift-completo.mp4). LIQUID FORM: video pendiente.
            Fuente de datos: ficha de producto (Superior / Inferior / Complementos).
            Para editar una prenda, cambia su <article class="pv">. Para poner foto o video donde hay ícono,
            reemplaza <div class="pv-illus">…</div> por <video> o <img>.
@@ -173,20 +180,26 @@
           <symbol id="t-protect" viewBox="0 0 24 24"><path d="M12 3.5 18.5 6v5c0 4.6-2.8 7.8-6.5 9.5C8.3 18.8 5.5 15.6 5.5 11V6Z"/></symbol>
           <symbol id="t-water" viewBox="0 0 24 24"><path d="M12 4.5 20 19H4Z"/></symbol>
           <symbol id="t-soft" viewBox="0 0 24 24"><path d="M12 3v7.5M9.2 8l2.8 2.8L14.8 8"/><path d="M4 14.5c2.7-1.6 5.3-1.6 8 0s5.3 1.6 8 0M4 17.8c2.7-1.6 5.3-1.6 8 0s5.3 1.6 8 0M4 21h16"/></symbol>
+          <symbol id="t-grip" viewBox="0 0 24 24"><path d="M3.5 18.5h17"/><path d="M4.5 18.5 6.5 14l2 4.5 2-4.5 2 4.5 2-4.5 2 4.5 2-4.5 1.5 4.5"/><path d="M6 9.5c3-3.5 9-3.5 12 0"/></symbol>
+          <symbol id="t-stable" viewBox="0 0 24 24"><path d="M3.5 19.5h17"/><path d="M6.5 19.5v-3.5h11v3.5"/><path d="M12 16V5M9 8l3-3 3 3"/></symbol>
+          <symbol id="t-flex" viewBox="0 0 24 24"><path d="M3.5 17c5-0.2 8.5-2.6 11-7 1-1.8 2.8-3 5-3"/><path d="M3.5 20.5h17"/><path d="M16.5 4.5 19.5 7l-2.5 3"/></symbol>
         </svg>
 
         <div class="wrap">
-          <div class="kicker reveal"><span>COLECCIÓN</span><span>SUPERIOR · INFERIOR · COMPLEMENTOS</span></div>
+          <div class="kicker reveal"><span>COLECCIÓN</span><span>CAMISA · CAMISETA · POLO · PANTALÓN · CHAQUETA</span></div>
           <div class="section-head">
-            <h2 id="collection-title" class="title reveal">La tecnología que importa<br>se siente en el uso<span class="period">.</span></h2>
-            <p class="lead-sm reveal">Siete prendas, una a la vez. Elige una en el menú de abajo.</p>
+            <h2 id="collection-title" class="title reveal">Se siente en el uso<span class="period">.</span></h2>
+            <p class="lead-sm reveal">Siete prendas, una a la vez. Elige una en el menú.</p>
           </div>
 
           <!-- Visor: se muestra una prenda a la vez -->
           <div class="pv-stage" aria-live="polite">
 
             <article class="pv" id="liquid-form" data-pv="liquid-form">
-              <div class="pv-media"><img class="pv-photo" src="assets/fotos/liquid-form-provisional.jpg" alt="Camisa LIQUID FORM (foto provisional)">
+              <div class="pv-media pv-mosaic">
+                <div class="pv-cell is-main"><img class="pv-photo" src="assets/fotos/liquid-form-provisional.jpg" alt="Camisa LIQUID FORM (foto provisional)" loading="lazy"></div>
+                <div class="pv-cell is-video"><img class="pv-photo" src="assets/fotos/lifestyle-m1.jpg" alt="LIQUID FORM en movimiento (foto provisional, video pendiente)" loading="lazy"></div>
+                <div class="pv-cell is-detail"><img class="pv-photo" src="assets/fotos/lifestyle-m4.jpg" alt="LIQUID FORM en la ciudad (foto provisional)" loading="lazy"></div>
                 <div class="pv-hud" aria-hidden="true">
                   <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
                   <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
@@ -196,7 +209,7 @@
               </div>
               <div class="pv-info">
                 <p class="pv-cat">CAMISA</p>
-                <h3 class="pv-name"><span class="pv-slash">//</span>LIQUID FORM</h3>
+                <h3 class="pv-name"><span class="pv-slash" aria-hidden="true">//</span>LIQUID FORM</h3>
                 <p class="pv-concept"><span class="lime-dot"></span>VERSATILIDAD<span class="pv-fit">FIT SLIM · MANGA LARGA</span></p>
                 <p class="pv-desc">Redefine la experiencia de llevar una camisa.</p>
                 <p class="pv-label">TECNOLOGÍA</p>
@@ -206,7 +219,10 @@
             </article>
 
             <article class="pv is-active" id="helix" data-pv="helix">
-              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/helix-clean.jpg" src="assets/video/helix-clean.mp4"></video>
+              <div class="pv-media pv-mosaic">
+                <div class="pv-cell is-main"><img class="pv-photo" src="assets/producto-fotos/helix-a.jpg" alt="Camiseta HELIX" loading="lazy"></div>
+                <div class="pv-cell is-video"><video muted autoplay loop playsinline preload="metadata" poster="assets/video/helix-completo.jpg" src="assets/video/helix-completo.mp4"></video></div>
+                <div class="pv-cell is-detail"><img class="pv-photo" src="assets/producto-fotos/helix-b.jpg" alt="Camiseta HELIX, detalle del torso" loading="lazy"></div>
                 <div class="pv-hud" aria-hidden="true">
                   <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
                   <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
@@ -216,7 +232,7 @@
               </div>
               <div class="pv-info">
                 <p class="pv-cat">CAMISETA</p>
-                <h3 class="pv-name"><span class="pv-slash">//</span>HELIX</h3>
+                <h3 class="pv-name"><span class="pv-slash" aria-hidden="true">//</span>HELIX</h3>
                 <p class="pv-concept"><span class="lime-dot"></span>EQUILIBRIO<span class="pv-fit">FIT SLIM</span></p>
                 <p class="pv-desc">Lleva la camiseta a una nueva dimensión de confort.</p>
                 <dl class="pv-specs"><div><dt>MATERIAL</dt><dd>50% algodón / 50% viscosa</dd></div></dl>
@@ -227,7 +243,10 @@
             </article>
 
             <article class="pv" id="pulse" data-pv="pulse">
-              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/pulse-clean.jpg" src="assets/video/pulse-clean.mp4"></video>
+              <div class="pv-media pv-mosaic">
+                <div class="pv-cell is-main"><video muted autoplay loop playsinline preload="metadata" data-start="0" poster="assets/video/polos-completo.jpg" src="assets/video/polos-completo.mp4"></video></div>
+                <div class="pv-cell is-video"><img class="pv-photo" src="assets/producto-fotos/pulse-a.jpg" alt="Polo PULSE" loading="lazy"></div>
+                <div class="pv-cell is-detail"><img class="pv-photo" src="assets/producto-fotos/pulse-b.jpg" alt="Polo PULSE, detalle del cuello" loading="lazy"></div>
                 <div class="pv-hud" aria-hidden="true">
                   <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
                   <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
@@ -237,7 +256,7 @@
               </div>
               <div class="pv-info">
                 <p class="pv-cat">POLO</p>
-                <h3 class="pv-name"><span class="pv-slash">//</span>PULSE</h3>
+                <h3 class="pv-name"><span class="pv-slash" aria-hidden="true">//</span>PULSE</h3>
                 <p class="pv-concept"><span class="lime-dot"></span>LIDERAZGO<span class="pv-fit">FIT SLIM</span></p>
                 <p class="pv-desc">Reinterpreta el polo tradicional para el ritmo del día.</p>
                 <dl class="pv-specs"><div><dt>MATERIAL</dt><dd>92% poliéster / 8% elastano</dd></div></dl>
@@ -248,7 +267,10 @@
             </article>
 
             <article class="pv" id="axiom" data-pv="axiom">
-              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/axiom-clean.jpg" src="assets/video/axiom-clean.mp4"></video>
+              <div class="pv-media pv-mosaic">
+                <div class="pv-cell is-main"><img class="pv-photo" src="assets/producto-fotos/axiom-a.jpg" alt="Camiseta AXIOM" loading="lazy"></div>
+                <div class="pv-cell is-video"><video muted autoplay loop playsinline preload="metadata" poster="assets/video/axiom-completo.jpg" src="assets/video/axiom-completo.mp4"></video></div>
+                <div class="pv-cell is-detail"><img class="pv-photo" src="assets/producto-fotos/axiom-b.jpg" alt="Camiseta AXIOM, detalle de la manga y el tejido" loading="lazy"></div>
                 <div class="pv-hud" aria-hidden="true">
                   <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
                   <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
@@ -258,7 +280,7 @@
               </div>
               <div class="pv-info">
                 <p class="pv-cat">CAMISETA</p>
-                <h3 class="pv-name"><span class="pv-slash">//</span>AXIOM</h3>
+                <h3 class="pv-name"><span class="pv-slash" aria-hidden="true">//</span>AXIOM</h3>
                 <p class="pv-concept"><span class="lime-dot"></span>PRECISIÓN<span class="pv-fit">FIT REGULAR</span></p>
                 <p class="pv-desc">Diseñada para una realidad en constante movimiento.</p>
                 <dl class="pv-specs"><div><dt>MATERIAL</dt><dd>88% algodón / 12% elastano</dd></div></dl>
@@ -269,7 +291,10 @@
             </article>
 
             <article class="pv" id="drift" data-pv="drift">
-              <div class="pv-media"><div class="pv-illus"><svg><use href="#i-drift"/></svg><span>FOTO / VIDEO PENDIENTE</span></div>
+              <div class="pv-media pv-mosaic">
+                <div class="pv-cell is-main"><video muted autoplay loop playsinline preload="metadata" poster="assets/video/drift-completo.jpg" src="assets/video/drift-completo.mp4"></video></div>
+                <div class="pv-cell is-video"><img class="pv-photo" src="assets/producto-fotos/drift-a.jpg" alt="Camiseta DRIFT" loading="lazy"></div>
+                <div class="pv-cell is-detail"><img class="pv-photo" src="assets/producto-fotos/drift-b.jpg" alt="Camiseta DRIFT: corte loose, cuello y mangas" loading="lazy"></div>
                 <div class="pv-hud" aria-hidden="true">
                   <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
                   <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
@@ -279,7 +304,7 @@
               </div>
               <div class="pv-info">
                 <p class="pv-cat">CAMISETA</p>
-                <h3 class="pv-name"><span class="pv-slash">//</span>DRIFT</h3>
+                <h3 class="pv-name"><span class="pv-slash" aria-hidden="true">//</span>DRIFT</h3>
                 <p class="pv-concept"><span class="lime-dot"></span>CONFORT CONSCIENTE<span class="pv-fit">FIT LOOSE</span></p>
                 <p class="pv-desc">Redefine lo que se espera de una camiseta de algodón.</p>
                 <dl class="pv-specs"><div><dt>MATERIAL</dt><dd>100% algodón peach de alto gramaje</dd></div><div><dt>ACABADO</dt><dd>Cuello con costuras expuestas</dd></div></dl>
@@ -290,7 +315,10 @@
             </article>
 
             <article class="pv" id="vector" data-pv="vector">
-              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/vector-clean.jpg" src="assets/video/vector-clean.mp4"></video>
+              <div class="pv-media pv-mosaic">
+                <div class="pv-cell is-main"><img class="pv-photo" src="assets/producto-fotos/vector-a.jpg" alt="Pantalón VECTOR" loading="lazy"></div>
+                <div class="pv-cell is-video"><video muted autoplay loop playsinline preload="metadata" data-start="0" poster="assets/video/pantalon-completo.jpg" src="assets/video/pantalon-completo.mp4"></video></div>
+                <div class="pv-cell is-detail"><img class="pv-photo" src="assets/producto-fotos/vector-b.jpg" alt="Pantalón VECTOR, detalle" loading="lazy"></div>
                 <div class="pv-hud" aria-hidden="true">
                   <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
                   <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
@@ -300,7 +328,7 @@
               </div>
               <div class="pv-info">
                 <p class="pv-cat">PANTALÓN</p>
-                <h3 class="pv-name"><span class="pv-slash">//</span>VECTOR</h3>
+                <h3 class="pv-name"><span class="pv-slash" aria-hidden="true">//</span>VECTOR</h3>
                 <p class="pv-concept"><span class="lime-dot"></span>DISCIPLINA<span class="pv-fit">FIT MODERN SLIM</span></p>
                 <p class="pv-desc">Reinventa el pantalón de uso diario.</p>
                 <dl class="pv-specs"><div><dt>MATERIAL</dt><dd>78% poliamida / 22% elastano</dd></div></dl>
@@ -311,7 +339,10 @@
             </article>
 
             <article class="pv" id="nimbus" data-pv="nimbus">
-              <div class="pv-media"><video muted loop playsinline preload="none" poster="assets/video/nimbus-clean.jpg" src="assets/video/nimbus-clean.mp4"></video>
+              <div class="pv-media pv-mosaic">
+                <div class="pv-cell is-main"><video muted autoplay loop playsinline preload="metadata" data-start="0" poster="assets/video/chaqueta-completo.jpg" src="assets/video/chaqueta-completo.mp4"></video></div>
+                <div class="pv-cell is-video"><img class="pv-photo" src="assets/producto-fotos/nimbus-a.jpg" alt="Chaqueta NIMBUS" loading="lazy"></div>
+                <div class="pv-cell is-detail"><img class="pv-photo" src="assets/producto-fotos/nimbus-b.jpg" alt="Chaqueta NIMBUS con capota" loading="lazy"></div>
                 <div class="pv-hud" aria-hidden="true">
                   <span class="hud-tag"><i class="lime-dot"></i>QL / SCAN</span>
                   <span class="hud-mode"><b>DAILY MOVEMENT</b><span class="hud-switch"><i></i></span></span>
@@ -321,7 +352,7 @@
               </div>
               <div class="pv-info">
                 <p class="pv-cat">CHAQUETA</p>
-                <h3 class="pv-name"><span class="pv-slash">//</span>NIMBUS</h3>
+                <h3 class="pv-name"><span class="pv-slash" aria-hidden="true">//</span>NIMBUS</h3>
                 <p class="pv-concept"><span class="lime-dot"></span>VISIÓN<span class="pv-fit">FIT SLIM</span></p>
                 <p class="pv-desc">La verdadera innovación no siempre está a la vista.</p>
                 <dl class="pv-specs"><div><dt>MATERIAL</dt><dd>100% poliéster técnico</dd></div></dl>
@@ -334,13 +365,13 @@
 
           <!-- Menú de prendas con íconos -->
           <nav class="pv-menu" aria-label="Elegir prenda" role="tablist">
-            <button role="tab" aria-selected="false" data-go="liquid-form"><svg><use href="#i-liquid"/></svg><b>LIQUID FORM</b><small>Superior</small></button>
-            <button role="tab" aria-selected="true" data-go="helix" class="is-active"><svg><use href="#i-helix"/></svg><b>HELIX</b><small>Superior</small></button>
-            <button role="tab" aria-selected="false" data-go="pulse"><svg><use href="#i-pulse"/></svg><b>PULSE</b><small>Superior</small></button>
-            <button role="tab" aria-selected="false" data-go="axiom"><svg><use href="#i-axiom"/></svg><b>AXIOM</b><small>Superior</small></button>
-            <button role="tab" aria-selected="false" data-go="drift"><svg><use href="#i-drift"/></svg><b>DRIFT</b><small>Superior</small></button>
-            <button role="tab" aria-selected="false" data-go="vector"><svg><use href="#i-vector"/></svg><b>VECTOR</b><small>Inferior</small></button>
-            <button role="tab" aria-selected="false" data-go="nimbus"><svg><use href="#i-nimbus"/></svg><b>NIMBUS</b><small>Complementos</small></button>
+            <button role="tab" aria-selected="false" data-go="liquid-form"><svg><use href="#i-liquid"/></svg><b>LIQUID FORM</b><small>Camisa</small></button>
+            <button role="tab" aria-selected="true" data-go="helix" class="is-active"><svg><use href="#i-helix"/></svg><b>HELIX</b><small>Camiseta</small></button>
+            <button role="tab" aria-selected="false" data-go="pulse"><svg><use href="#i-pulse"/></svg><b>PULSE</b><small>Polo</small></button>
+            <button role="tab" aria-selected="false" data-go="axiom"><svg><use href="#i-axiom"/></svg><b>AXIOM</b><small>Camiseta</small></button>
+            <button role="tab" aria-selected="false" data-go="drift"><svg><use href="#i-drift"/></svg><b>DRIFT</b><small>Camiseta</small></button>
+            <button role="tab" aria-selected="false" data-go="vector"><svg><use href="#i-vector"/></svg><b>VECTOR</b><small>Pantalón</small></button>
+            <button role="tab" aria-selected="false" data-go="nimbus"><svg><use href="#i-nimbus"/></svg><b>NIMBUS</b><small>Chaqueta</small></button>
           </nav>
         </div>
       </section>
@@ -353,44 +384,66 @@
           <div class="kicker reveal"><span>QUANTA TRAIL / X-RAY VIEW</span><span>QUEST[LAB] / 2026</span></div>
 
           <div class="xray-grid">
+            <!-- Misma distribución que la Colección: escáner (grande) + video + galería X-Ray -->
+            <div class="xray-mosaic reveal">
+              <div class="pv-cell is-main">
+                <!-- Escáner: la capa "scan" está alineada con la foto y se revela en la franja -->
+                <div class="scanner" data-scanner>
+                  <img class="scan-base" src="assets/producto/quanta-03.jpg" alt="Quanta Trail, par de tenis" loading="lazy">
+                  <img class="scan-layer" src="assets/producto/quanta-03-scan.jpg" alt="" aria-hidden="true" loading="lazy">
+                  <span class="scan-line" aria-hidden="true"><b data-scan-readout>SCAN 000%</b></span>
+                  <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+                  <span class="scanner-tag">MUEVE EL CURSOR PARA ESCANEAR</span>
+                </div>
+              </div>
+              <div class="pv-cell is-video"><video data-autoplay muted loop playsinline preload="none" poster="assets/video/quanta-trail.jpg" src="assets/video/quanta-trail.mp4"></video></div>
+              <div class="pv-cell is-detail">
+
+                <!-- Galería X-Ray: carrusel en la misma tarjeta con las radiografías oficiales del Quanta Trail -->
+                <figure class="xray-official" data-xgallery>
+                  <img class="xg-slide is-active" src="assets/producto/quanta-xray.jpg" alt="Vista de rayos X del Quanta Trail" loading="lazy">
+                  <img class="xg-slide" src="assets/producto/quanta-xray-apilados.jpg" alt="Par de Quanta Trail apilados en rayos X" loading="lazy">
+                  <img class="xg-slide" src="assets/producto/quanta-xray-par.jpg" alt="Par de Quanta Trail de frente en rayos X" loading="lazy">
+                  <img class="xg-slide" src="assets/producto/quanta-xray-talon.jpg" alt="Talón del Quanta Trail en rayos X" loading="lazy">
+                  <div class="scan-nav">
+                    <button type="button" data-xg-prev aria-label="Foto anterior">←</button>
+                    <span data-xg-count>01 / 04</span>
+                    <button type="button" data-xg-next aria-label="Foto siguiente">→</button>
+                  </div>
+                  <figcaption><span>X-RAY VIEW</span><span>QUANTA TRAIL</span></figcaption>
+                </figure>
+              </div>
+            </div>
+
             <div class="xray-copy">
-              <!-- Ícono propio del producto (mismo sistema de íconos de la Colección) -->
-              <div class="xray-icon reveal"><svg><use href="#i-quanta"/></svg><span><b>// ZAPATILLA QUANTA TRAIL</b><small>QUEST[LAB] / 2026</small></span></div>
-              <p class="xray-eyebrow reveal"><span class="lime-dot"></span>FUNCIONALIDAD / FRESCURA PROLONGADA</p>
-              <h2 id="xray-title" class="title reveal">Lo que no<br>se ve<span class="period">.</span></h2>
-              <p class="lead-sm reveal">Hay una tecnología que se ve, y hay una que no. La que no se ve es la que realmente importa.</p>
-              <ol class="xray-list" data-xray-list>
-                <li><em><b>AGARRE EN DIFERENTES SUPERFICIES.</b><small>· TRACCIÓN</small></em></li>
-                <li><em><b>APOYO FIRME EN TERRENOS IRREGULARES.</b><small>· ESTABILIDAD</small></em></li>
-                <li><em><b>FLEXIÓN NATURAL DEL PIE.</b><small>· ADAPTABILIDAD</small></em></li>
-                <li><em><b>FRESCURA PROLONGADA Y CONTROL DE TEMPERATURA.</b><small>· CONFORT</small></em></li>
+              <!-- Misma ficha que las prendas de la Colección: tipo, // NOMBRE, concepto + atributo, frase -->
+              <p class="pv-cat reveal">CALZADO</p>
+              <h2 id="xray-title" class="pv-name reveal"><span class="pv-slash" aria-hidden="true">//</span>QUANTA TRAIL</h2>
+              <p class="pv-concept reveal"><span class="lime-dot"></span>FUNCIONALIDAD<span class="pv-fit">FRESCURA PROLONGADA</span></p>
+              <p class="pv-desc reveal">Lleva el carácter del calzado de exploración a una nueva expresión de estilo.</p>
+              <p class="pv-label reveal">ATRIBUTOS</p>
+              <ol class="xray-list pv-attrs" data-xray-list>
+                <li><svg class="ti" aria-hidden="true"><use href="#t-grip"/></svg><div><b>AGARRE EN DIFERENTES SUPERFICIES.</b><span>Tracción</span></div></li>
+                <li><svg class="ti" aria-hidden="true"><use href="#t-stable"/></svg><div><b>APOYO FIRME EN TERRENOS IRREGULARES.</b><span>Estabilidad</span></div></li>
+                <li><svg class="ti" aria-hidden="true"><use href="#t-flex"/></svg><div><b>FLEXIÓN NATURAL DEL PIE.</b><span>Adaptabilidad</span></div></li>
+                <li><svg class="ti" aria-hidden="true"><use href="#t-fresh"/></svg><div><b>FRESCURA PROLONGADA Y CONTROL DE TEMPERATURA.</b><span>Confort</span></div></li>
               </ol>
               <!-- Call to action de compra. URL de la tienda PENDIENTE: reemplazar href="#" por el enlace real -->
               <a class="btn btn-solid xray-buy reveal" href="#" data-buy="quanta-trail">COMPRAR QUANTA TRAIL <span aria-hidden="true">↗</span></a>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <!-- Escáner: la capa "scan" está alineada con la foto y se revela en la franja -->
-            <div class="scanner reveal" data-scanner>
-              <img class="scan-base" src="assets/producto/quanta-03.jpg" alt="Quanta Trail, par de tenis" loading="lazy">
-              <img class="scan-layer" src="assets/producto/quanta-03-scan.jpg" alt="" aria-hidden="true" loading="lazy">
-              <span class="scan-line" aria-hidden="true"><b data-scan-readout>SCAN 000%</b></span>
-              <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-              <span class="scanner-tag">MUEVE EL CURSOR PARA ESCANEAR</span>
-            </div>
-
-            <!-- Galería X-Ray: carrusel en la misma tarjeta con las radiografías oficiales del Quanta Trail -->
-            <figure class="xray-official reveal" data-xgallery>
-              <img class="xg-slide is-active" src="assets/producto/quanta-xray.jpg" alt="Vista de rayos X del Quanta Trail" loading="lazy">
-              <img class="xg-slide" src="assets/producto/quanta-xray-apilados.jpg" alt="Par de Quanta Trail apilados en rayos X" loading="lazy">
-              <img class="xg-slide" src="assets/producto/quanta-xray-par.jpg" alt="Par de Quanta Trail de frente en rayos X" loading="lazy">
-              <img class="xg-slide" src="assets/producto/quanta-xray-talon.jpg" alt="Talón del Quanta Trail en rayos X" loading="lazy">
-              <div class="scan-nav">
-                <button type="button" data-xg-prev aria-label="Foto anterior">←</button>
-                <span data-xg-count>01 / 04</span>
-                <button type="button" data-xg-next aria-label="Foto siguiente">→</button>
-              </div>
-              <figcaption><span>X-RAY VIEW</span><span>QUANTA TRAIL</span></figcaption>
-            </figure>
+      <!-- ============ CINTA DE MOVIMIENTO — transición animada (referente integrated-reasoning) ============
+           Al bajar, la cinta pasa de una línea fina a una cinta de líneas que se ondula y gira,
+           y cambia de gris a blanco, azul QL y lima. Solo colores del manual. -->
+      <section class="motion" id="movimiento" aria-label="Movimiento">
+        <div class="motion-sticky">
+          <canvas class="motion-canvas" data-ribbon aria-hidden="true"></canvas>
+          <div class="wrap motion-ui">
+            <div class="kicker"><span>QUEST[LAB] / MOTION</span><span>DESIGNED TO ADAPT.</span></div>
+            <p class="motion-code"><span data-ribbon-readout>MOTION 000%</span><br>SYS.1995 / MODULE: LAB_2026</p>
           </div>
         </div>
       </section>
@@ -434,10 +487,110 @@
               <figcaption data-provisional><span>LOOK 04</span><span>PULSE</span></figcaption>
             </figure>
             <figure class="look reveal">
-              <img class="look-img" src="assets/fotos/james-look-03.jpg" alt="James Rodríguez con chaqueta con capucha" loading="lazy">
-              <img class="look-ghost" src="assets/fotos/james-look-03.jpg" alt="" aria-hidden="true" loading="lazy">
-              <figcaption data-provisional><span>LOOK 05</span><span>NIMBUS</span></figcaption>
+              <img class="look-img" src="assets/fotos/james-look-05.jpg" alt="James Rodríguez con prenda negra de cuello" loading="lazy">
+              <img class="look-ghost" src="assets/fotos/james-look-05.jpg" alt="" aria-hidden="true" loading="lazy">
+              <figcaption data-provisional><span>LOOK 05</span><span>PULSE</span></figcaption>
             </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ÍNDICE DE PRENDAS — referente integrated-reasoning (diapositiva "Y Combinator") ============
+           Una prenda por diapositiva: nombre grande, concepto, ícono propio que se va dibujando trazo a trazo
+           (cuando termina de dibujarse pasa a la siguiente prenda),
+           beneficio principal y botón a la prenda en la Colección. Cambia sola; la barra lima marca el tiempo.
+           Sin calzado: esta sección sigue a James (manual p.5). -->
+      <section class="press" id="indice" aria-label="Índice de prendas">
+        <div class="wrap">
+          <div class="kicker reveal"><span>QUEST[LAB] / ÍNDICE</span><span>SIETE PRENDAS · UNA PROPUESTA</span></div>
+          <div class="px-stage" data-press>
+            <article class="px-slide is-active" data-px="liquid-form" data-icon="i-liquid" data-name="LIQUID FORM" data-type="CAMISA">
+              <h3 class="px-title">LIQUID FORM</h3>
+              <p class="px-lead">VERSATILIDAD<br>CAMISA</p>
+              <div class="px-icon" aria-hidden="true"><svg class="px-draw" viewBox="0 0 64 64"></svg></div>
+              <div class="px-quote">
+                <p>“SE MUEVE CONTIGO CON NATURALIDAD.”</p>
+                <span class="px-mark" aria-hidden="true">”</span>
+                <a class="px-btn" href="#coleccion" data-px-go="liquid-form">VER PRENDA <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="px-meta"><span>FIT SLIM · MANGA LARGA</span><span>EXPAND MOTION 4-WAY · LIGHT MOTION</span></p>
+            </article>
+            <article class="px-slide" data-px="helix" data-icon="i-helix" data-name="HELIX" data-type="CAMISETA">
+              <h3 class="px-title">HELIX</h3>
+              <p class="px-lead">EQUILIBRIO<br>CAMISETA</p>
+              <div class="px-icon" aria-hidden="true"><svg class="px-draw" viewBox="0 0 64 64"></svg></div>
+              <div class="px-quote">
+                <p>“FRESCA Y SUAVE AL TACTO.”</p>
+                <span class="px-mark" aria-hidden="true">”</span>
+                <a class="px-btn" href="#coleccion" data-px-go="helix">VER PRENDA <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="px-meta"><span>FIT SLIM</span><span>50% ALGODÓN / 50% VISCOSA</span></p>
+            </article>
+            <article class="px-slide" data-px="pulse" data-icon="i-pulse" data-name="PULSE" data-type="POLO">
+              <h3 class="px-title">PULSE</h3>
+              <p class="px-lead">LIDERAZGO<br>POLO</p>
+              <div class="px-icon" aria-hidden="true"><svg class="px-draw" viewBox="0 0 64 64"></svg></div>
+              <div class="px-quote">
+                <p>“TEJIDO ELÁSTICO Y ULTRA LIGERO.”</p>
+                <span class="px-mark" aria-hidden="true">”</span>
+                <a class="px-btn" href="#coleccion" data-px-go="pulse">VER PRENDA <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="px-meta"><span>FIT SLIM</span><span>92% POLIÉSTER / 8% ELASTANO</span></p>
+            </article>
+            <article class="px-slide" data-px="axiom" data-icon="i-axiom" data-name="AXIOM" data-type="CAMISETA">
+              <h3 class="px-title">AXIOM</h3>
+              <p class="px-lead">PRECISIÓN<br>CAMISETA</p>
+              <div class="px-icon" aria-hidden="true"><svg class="px-draw" viewBox="0 0 64 64"></svg></div>
+              <div class="px-quote">
+                <p>“SE ESTIRA CONTIGO Y VUELVE A SU FORMA NATURAL.”</p>
+                <span class="px-mark" aria-hidden="true">”</span>
+                <a class="px-btn" href="#coleccion" data-px-go="axiom">VER PRENDA <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="px-meta"><span>FIT REGULAR</span><span>88% ALGODÓN / 12% ELASTANO</span></p>
+            </article>
+            <article class="px-slide" data-px="drift" data-icon="i-drift" data-name="DRIFT" data-type="CAMISETA">
+              <h3 class="px-title">DRIFT</h3>
+              <p class="px-lead">CONFORT CONSCIENTE<br>CAMISETA</p>
+              <div class="px-icon" aria-hidden="true"><svg class="px-draw" viewBox="0 0 64 64"></svg></div>
+              <div class="px-quote">
+                <p>“ALGODÓN PEACH EXTRA SUAVE AL TACTO.”</p>
+                <span class="px-mark" aria-hidden="true">”</span>
+                <a class="px-btn" href="#coleccion" data-px-go="drift">VER PRENDA <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="px-meta"><span>FIT LOOSE</span><span>100% ALGODÓN PEACH</span></p>
+            </article>
+            <article class="px-slide" data-px="vector" data-icon="i-vector" data-name="VECTOR" data-type="PANTALÓN">
+              <h3 class="px-title">VECTOR</h3>
+              <p class="px-lead">DISCIPLINA<br>PANTALÓN</p>
+              <div class="px-icon" aria-hidden="true"><svg class="px-draw" viewBox="0 0 64 64"></svg></div>
+              <div class="px-quote">
+                <p>“ELÁSTICO EN CADA MOVIMIENTO SIN PERDER SU FORMA.”</p>
+                <span class="px-mark" aria-hidden="true">”</span>
+                <a class="px-btn" href="#coleccion" data-px-go="vector">VER PRENDA <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="px-meta"><span>FIT MODERN SLIM</span><span>78% POLIAMIDA / 22% ELASTANO</span></p>
+            </article>
+            <article class="px-slide" data-px="nimbus" data-icon="i-nimbus" data-name="NIMBUS" data-type="CHAQUETA">
+              <h3 class="px-title">NIMBUS</h3>
+              <p class="px-lead">VISIÓN<br>CHAQUETA</p>
+              <div class="px-icon" aria-hidden="true"><svg class="px-draw" viewBox="0 0 64 64"></svg></div>
+              <div class="px-quote">
+                <p>“100% IMPERMEABLE CON COSTURAS TERMOSELLADAS.”</p>
+                <span class="px-mark" aria-hidden="true">”</span>
+                <a class="px-btn" href="#coleccion" data-px-go="nimbus">VER PRENDA <span aria-hidden="true">↗</span></a>
+              </div>
+              <p class="px-meta"><span>FIT SLIM</span><span>100% POLIÉSTER TÉCNICO</span></p>
+            </article>
+            <!-- Recuadros de navegación: siguiente prenda (claro) y prenda actual (oscuro, con barra de tiempo) -->
+            <div class="px-tiles">
+              <button type="button" class="px-tile is-next" data-px-next aria-label="Siguiente prenda">
+                <svg><use href="#i-helix"/></svg><b>HELIX</b><small>Siguiente</small>
+              </button>
+              <div class="px-tile is-current">
+                <span class="px-bar"><i></i></span>
+                <svg><use href="#i-liquid"/></svg><b>LIQUID FORM</b><small>01 / 07</small>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -495,7 +648,7 @@
           <div class="kicker reveal"><span>VITRINA</span><span>LANZAMIENTO 2026</span></div>
           <div class="section-head">
             <h2 id="vitrina-title" class="title reveal">La colección<span class="period">.</span></h2>
-            <p class="lead-sm reveal">Ocho piezas: superior, inferior, complementos y calzado.</p>
+            <p class="lead-sm reveal">Ocho piezas: camisa, camisetas, polo, pantalón, chaqueta y calzado.</p>
           </div>
 
           <div class="vt-grid">
@@ -565,6 +718,7 @@
           </div>
 
           <img class="banner-logo" src="assets/brand/quest-lab-wordmark.png" alt="QUEST LAB">
+          <img class="banner-logo-lab" src="assets/brand/lab-mark.png" alt="" aria-hidden="true">
 
           <div class="banner-project"><span><b>PRO</b>JECT</span><span>James Rodríguez</span></div>
 
