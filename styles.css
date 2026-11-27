@@ -1299,3 +1299,8 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   .px-strip-bar i { position: absolute; inset: 0; background: var(--lime); transform-origin: left; transform: scaleX(var(--p, 0)); }
   .px-strip-btn.is-active .px-strip-bar { opacity: 1; }
 }
+
+/* Vitrina: fotos de catálogo a color sobre el gris (simulacro hasta tener los packshots oficiales) */
+.vt-media img { filter: none; object-fit: cover; }
+.vt-card:hover .vt-media img { filter: none; }
+
